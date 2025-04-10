@@ -15,17 +15,17 @@
  * https://github.com/react-native-community/discussions-and-proposals/discussions/827
  */
 
-import React from "react";
-import { Provider } from "react-redux";
-import { FlatList, Text } from "react-native";
-import { PersistGate } from "redux-persist/integration/react";
-import { persistor, store } from "./store/store";
+import React from 'react';
+import { Provider } from 'react-redux';
+import { FlatList, Text } from 'react-native';
+import { PersistGate } from 'redux-persist/integration/react';
+import { persistor, store } from './store/store';
 
 const mockNews = [
-  { id: "1", title: "Test1" },
-  { id: "2", title: "Test2" },
-  { id: "3", title: "Test3" },
-  { id: "4", title: "Test4" },
+  { id: '1', title: 'Test1' },
+  { id: '2', title: 'Test2' },
+  { id: '3', title: 'Test3' },
+  { id: '4', title: 'Test4' },
 ];
 
 export const NewsList = () => {
