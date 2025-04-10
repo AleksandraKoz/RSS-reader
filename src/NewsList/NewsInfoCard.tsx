@@ -1,6 +1,6 @@
 import React from 'react';
-import { Text, View, StyleSheet, Image } from 'react-native';
-import { connect } from 'react-redux';
+import { Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 
 interface INewsInfoCard {
   title: string;
@@ -10,13 +10,20 @@ interface INewsInfoCard {
 }
 
 const NewsInfoCard = ({ title, description, date, images }: INewsInfoCard): React.JSX.Element => {
+  const navigation = useNavigation();
+  const onCardClick = () => {
+    navigation.navigate('NewsDetails', {
+      newsItem: { title, description, date, images },
+    });
+  };
+
   return (
-    <View style={styles.wrapper}>
+    <TouchableOpacity onPress={onCardClick} style={styles.wrapper}>
       {images ? <Image source={{ uri: images }} style={styles.image} /> : null}
       <Text style={styles.titleText}>{title}</Text>
       <Text numberOfLines={4}>{description}</Text>
       <Text style={styles.date}>{date}</Text>
-    </View>
+    </TouchableOpacity>
   );
 };
 
@@ -46,8 +53,4 @@ const styles = StyleSheet.create({
   },
 });
 
-const mapStateToProps = (state) => ({});
-
-const mapDispatchToProps = (dispatch) => ({});
-
-export default connect(mapStateToProps, mapDispatchToProps)(NewsInfoCard);
+export default NewsInfoCard;
