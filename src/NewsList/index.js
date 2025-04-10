@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { FlatList, KeyboardAvoidingView, Platform, Text, View } from 'react-native';
+import { FlatList, SafeAreaView, Text } from 'react-native';
 import { connect } from 'react-redux';
 
 import { getNewsFeed } from '../../store/News/actions';
@@ -19,10 +19,7 @@ const NewsList = ({ newsDetails, getNewsFeed }) => {
   };
 
   return (
-    <KeyboardAvoidingView
-      behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-      style={{ paddingTop: 100, flex: 1 }}
-    >
+    <SafeAreaView style={{ backgroundColor: 'rgba(241, 239, 236,1)' }}>
       <FlatList
         data={newsDetails?.items}
         keyExtractor={(item) => item.id}
@@ -33,7 +30,7 @@ const NewsList = ({ newsDetails, getNewsFeed }) => {
         )}
         ListHeaderComponent={header()}
       />
-    </KeyboardAvoidingView>
+    </SafeAreaView>
   );
 };
 
