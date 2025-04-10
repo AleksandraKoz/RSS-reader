@@ -1,0 +1,76 @@
+# Node modules
+node_modules/
+.buckd/
+.bazelrc
+.bazelversion
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+expo-debug.log
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Metro
+babel.config.js
+
+# React Native
+ios/Pods/
+ios/build/
+ios/DerivedData/
+android/.gradle/
+android/app/build/
+android/build/
+android/local.properties
+
+# Watchman
+.watchmanconfig
+
+# Android
+*.apk
+*.aar
+*.iml
+android/.idea
+android/.cxx/
+android/app/*.iml
+android/*.iml
+android/.DS_Store
+android/gradle.properties
+
+# iOS
+*.pbxuser
+!default.pbxuser
+*.mode1v3
+*.mode2v3
+*.perspectivev3
+xcuserdata/
+*.xcworkspace
+*.xcodeproj/project.xcworkspace/
+*.xcodeproj/xcuserdata/
+ios/.DS_Store
+ios/*.xcodeproj/*
+ios/*.xcworkspace/*
+
+# Testing
+coverage/
+jest-test-results.json
+
+# TypeScript
+*.tsbuildinfo
+
+# macOS system files
+*.swp
+
+# Misc
+.env
+.env.*
+*.keystore
+*.jks
+credentials.json
+
+# VSCode
+.vscode/
