@@ -1,12 +1,12 @@
 import React from 'react';
 import { Text, View, StyleSheet } from 'react-native';
 
-interface INewsInfoCard {
+interface INewsListHeader {
   title: string;
   description: string;
 }
 
-const NewsListHeader = ({ title, description }: INewsInfoCard): React.JSX.Element => {
+const NewsListHeader = ({ title, description }: INewsListHeader): React.JSX.Element => {
   return (
     <View style={styles.wrapper}>
       <Text style={styles.titleText}>{title}</Text>
