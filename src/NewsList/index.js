@@ -20,7 +20,7 @@ const NewsList = ({ newsDetails, getNewsFeed }) => {
   };
 
   return (
-    <SafeAreaView style={{ backgroundColor: 'rgba(241, 239, 236,1)' }}>
+    <SafeAreaView style={{ backgroundColor: 'rgba(212, 201, 190, 1)' }}>
       <FlatList
         data={newsDetails?.items}
         keyExtractor={(item) => item.id}
