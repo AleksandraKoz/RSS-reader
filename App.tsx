@@ -2,13 +2,13 @@ import React from 'react';
 import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
 import { persistor, store } from './store/store';
-import NewsList from './src/NewsList/index';
+import MainStack from './src/navigation/MainStack.tsx';
 
 function App(): React.JSX.Element {
   return (
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
-        <NewsList />
+        <MainStack />
       </PersistGate>
     </Provider>
   );
