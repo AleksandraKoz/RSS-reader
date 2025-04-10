@@ -1,39 +1,34 @@
 import React, { useEffect } from 'react';
-import { FlatList, KeyboardAvoidingView, Platform, Text, View } from 'react-native';
+import { FlatList, SafeAreaView } from 'react-native';
 import { connect } from 'react-redux';
 
 import { getNewsFeed } from '../../store/News/actions';
+import NewsInfoCard from './NewsInfoCard';
+import NewsListHeader from './NewsListHeader';
 
 const NewsList = ({ newsDetails, getNewsFeed }) => {
   useEffect(() => {
     getNewsFeed();
   }, [getNewsFeed]);
 
-  const header = () => {
-    return (
-      <>
-        <Text>{newsDetails?.title}</Text>
-        <Text>{newsDetails?.description}</Text>
-      </>
-    );
-  };
-
   return (
-    <KeyboardAvoidingView
-      behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-      style={{ paddingTop: 100, flex: 1 }}
-    >
+    <SafeAreaView style={{ backgroundColor: 'rgba(212, 201, 190, 1)' }}>
       <FlatList
         data={newsDetails?.items}
         keyExtractor={(item) => item.id}
         renderItem={({ item }) => (
-          <View>
-            <Text>{item?.title}</Text>
-          </View>
+          <NewsInfoCard
+            title={item?.title}
+            description={item?.description}
+            date={item?.published}
+            images={item?.enclosure?.url ?? item?.enclosures?.[0]?.url}
+          />
         )}
-        ListHeaderComponent={header()}
+        ListHeaderComponent={
+          <NewsListHeader title={newsDetails?.title} description={newsDetails?.description} />
+        }
       />
-    </KeyboardAvoidingView>
+    </SafeAreaView>
   );
 };
 
