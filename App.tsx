@@ -15,17 +15,17 @@
  * https://github.com/react-native-community/discussions-and-proposals/discussions/827
  */
 
-import React from 'react';
-import {Provider} from 'react-redux';
-import {Text, FlatList} from 'react-native';
-import {PersistGate} from "redux-persist/integration/react";
-import {store, persistor} from './store/store';
+import React from "react";
+import { Provider } from "react-redux";
+import { FlatList, Text } from "react-native";
+import { PersistGate } from "redux-persist/integration/react";
+import { persistor, store } from "./store/store";
 
 const mockNews = [
-  {id: '1', title: 'Test1'},
-  {id: '2', title: 'Test2'},
-  {id: '3', title: 'Test3'},
-  {id: '4', title: 'Test4'},
+  { id: "1", title: "Test1" },
+  { id: "2", title: "Test2" },
+  { id: "3", title: "Test3" },
+  { id: "4", title: "Test4" },
 ];
 
 export const NewsList = () => {
@@ -33,19 +33,16 @@ export const NewsList = () => {
     <FlatList
       data={mockNews}
       keyExtractor={(item) => item.id}
-      renderItem={({item}) => (
-        <Text>{item.title}</Text>
-      )}
+      renderItem={({ item }) => <Text>{item.title}</Text>}
     />
   );
 };
 
 function App(): React.JSX.Element {
-
   return (
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
-        <NewsList/>
+        <NewsList />
       </PersistGate>
     </Provider>
   );
