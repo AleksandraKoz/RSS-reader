@@ -9,8 +9,6 @@
     "plugin:react-native/all",
     "plugin:@typescript-eslint/recommended",
     "plugin:@typescript-eslint/recommended-requiring-type-checking",
-    "airbnb",
-    "airbnb/hooks",
     "prettier"
   ],
   "parser": "@typescript-eslint/parser",
@@ -90,9 +88,6 @@
       "files": [
         "**/__tests__/**/*.[jt]s?(x)",
         "**/?(*.)+(spec|test).[jt]s?(x)"
-      ],
-      "extends": [
-        "plugin:testing-library/react"
       ]
     }
   ],
