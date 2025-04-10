@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { FlatList, SafeAreaView, Text } from 'react-native';
+import { FlatList, SafeAreaView, StyleSheet, Text, View } from 'react-native';
 import { connect } from 'react-redux';
 
 import { getNewsFeed } from '../../store/News/actions';
@@ -12,10 +12,10 @@ const NewsList = ({ newsDetails, getNewsFeed }) => {
 
   const header = () => {
     return (
-      <>
-        <Text>{newsDetails?.title}</Text>
-        <Text>{newsDetails?.description}</Text>
-      </>
+      <View style={styles.wrapper}>
+        <Text style={styles.titleText}>{newsDetails?.title}</Text>
+        <Text style={styles.descriptionText}>{newsDetails?.description}</Text>
+      </View>
     );
   };
 
@@ -37,6 +37,28 @@ const NewsList = ({ newsDetails, getNewsFeed }) => {
     </SafeAreaView>
   );
 };
+
+const styles = StyleSheet.create({
+  descriptionText: {
+    color: 'rgba(18, 52, 88,1)',
+    fontSize: 15,
+    textAlign: 'center',
+  },
+  titleText: {
+    color: 'rgba(18, 52, 88,1)',
+    fontSize: 25,
+    fontWeight: 'bold',
+    textAlign: 'center',
+  },
+  wrapper: {
+    backgroundColor: 'rgba(241, 239, 236,1)',
+    borderRadius: 20,
+    flex: 1,
+    marginBottom: 10,
+    marginHorizontal: 5,
+    padding: 10,
+  },
+});
 
 const mapStateToProps = (state) => ({
   newsDetails: state.news.newsDetails,
