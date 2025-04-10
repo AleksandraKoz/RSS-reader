@@ -5,33 +5,40 @@ import { connect } from 'react-redux';
 interface INewsInfoCard {
   title: string;
   description: string;
-  published: string;
+  date: string;
   images: string;
 }
 
-const NewsInfoCard = ({
-  title,
-  description,
-  published,
-  images,
-}: INewsInfoCard): React.JSX.Element => {
+const NewsInfoCard = ({ title, description, date, images }: INewsInfoCard): React.JSX.Element => {
   return (
     <View style={styles.wrapper}>
-      <Image source={{ uri: images }} />
+      {images ? <Image source={{ uri: images }} style={styles.image} /> : null}
       <Text style={styles.titleText}>{title}</Text>
-      <Text>{description}</Text>
-      <Text>{published}</Text>
+      <Text numberOfLines={4}>{description}</Text>
+      <Text style={styles.date}>{date}</Text>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
+  date: {
+    color: '#444',
+    fontSize: 12,
+    marginTop: 8,
+  },
+  image: {
+    backgroundColor: '#eee',
+    borderRadius: 12,
+    height: 180,
+    marginBottom: 10,
+    width: '100%',
+  },
   titleText: {
     fontWeight: 'bold',
   },
   wrapper: {
-    backgroundColor: 'rgba(212, 201, 190, 1)',
-    borderRadius: '3%',
+    backgroundColor: 'rgba(241, 239, 236,1)',
+    borderRadius: 20,
     flex: 1,
     marginHorizontal: 15,
     marginVertical: 5,
