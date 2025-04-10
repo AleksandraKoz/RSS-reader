@@ -3,6 +3,7 @@ import { FlatList, SafeAreaView, Text } from 'react-native';
 import { connect } from 'react-redux';
 
 import { getNewsFeed } from '../../store/News/actions';
+import NewsInfoCard from './NewsInfoCard';
 
 const NewsList = ({ newsDetails, getNewsFeed }) => {
   useEffect(() => {
@@ -24,9 +25,12 @@ const NewsList = ({ newsDetails, getNewsFeed }) => {
         data={newsDetails?.items}
         keyExtractor={(item) => item.id}
         renderItem={({ item }) => (
-          <View>
-            <Text>{item?.title}</Text>
-          </View>
+          <NewsInfoCard
+            title={item?.title}
+            description={item?.description}
+            date={item?.published}
+            images={item?.enclosures[0].url}
+          />
         )}
         ListHeaderComponent={header()}
       />
