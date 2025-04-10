@@ -74,3 +74,12 @@ credentials.json
 
 # VSCode
 .vscode/
+
+# IDEA Idle
+.idea/
+
+# Yarn
+.yarn/
+
+# Other
+vendor/
