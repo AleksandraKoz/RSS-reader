@@ -29,7 +29,7 @@ const NewsList = ({ newsDetails, getNewsFeed }) => {
             title={item?.title}
             description={item?.description}
             date={item?.published}
-            images={item?.enclosures[0].url}
+            images={item?.enclosure?.url ?? item?.enclosures?.[0]?.url}
           />
         )}
         ListHeaderComponent={header()}
