@@ -7,11 +7,11 @@ type NewsDetailsRouteProp = RouteProp<MainStackParamList, 'NewsDetails'>;
 
 const NewsDetails = (): React.JSX.Element => {
   const route = useRoute<NewsDetailsRouteProp>();
-  const { title, description, date, enclosure, images } = route.params.newsItem;
+  const { title, description, date, images } = route.params.newsItem;
 
   return (
     <ScrollView style={{ backgroundColor: 'rgba(241, 239, 236,1)' }}>
-      <Image source={{ uri: enclosure?.url || images }} style={styles.image} resizeMode="cover" />
+      <Image source={{ uri: images }} style={styles.image} resizeMode="cover" />
       <View style={styles.content}>
         <Text style={styles.title}>{title}</Text>
         <Text style={styles.date}>{date}</Text>
