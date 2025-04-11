@@ -9,8 +9,10 @@ import {
   StyleSheet,
 } from 'react-native';
 import { connect } from 'react-redux';
-import { addNewFeed } from '../../store/News/actions';
+
 import SaveIcon from '../../src/assets/save.png';
+
+import { addNewFeed } from '../../store/News/actions';
 import FeedList from './FeedList';
 import Wrapper from '../components/Wrapper';
 
