@@ -1,6 +1,5 @@
 import React from 'react';
 import { StyleSheet, Text } from 'react-native';
-import { connect } from 'react-redux';
 
 import Wrapper from '../components/Wrapper.tsx';
 
@@ -16,11 +15,7 @@ const EmptyList = ({ feedUrl }: IEmptyList): React.JSX.Element => {
   );
 };
 
-const mapStateToProps = (state: any) => ({});
-
-const mapDispatchToProps = (dispatch: any) => ({});
-
-export default connect(mapStateToProps, mapDispatchToProps)(EmptyList);
+export default EmptyList;
 
 const styles = StyleSheet.create({
   titleText: {
