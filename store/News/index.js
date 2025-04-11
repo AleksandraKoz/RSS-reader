@@ -20,6 +20,7 @@ const initialState = {
   addFeedError: '',
   updateFeedError: '',
   deleteFeedError: '',
+  getNewsError: '',
 };
 
 export default (state = initialState, action) => {
@@ -28,9 +29,7 @@ export default (state = initialState, action) => {
       return {
         ...state,
         isPending: true,
-        addFeedError: '',
-        updateFeedError: '',
-        deleteFeedError: '',
+        getNewsError: '',
       };
 
     case ADD_NEW_FEED_PENDING:
@@ -102,11 +101,17 @@ export default (state = initialState, action) => {
       };
 
     case GET_NEWS_FEED_FULFILLED:
+      return {
+        ...state,
+        isPending: false,
+        newsDetails: action.payload.data,
+      };
+
     case GET_NEWS_FEED_REJECTED:
       return {
         ...state,
-        isPending: true,
-        newsDetails: action.payload.data,
+        isPending: false,
+        getNewsError: action.payload.error,
       };
     default:
       return state;

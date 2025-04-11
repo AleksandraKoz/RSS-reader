@@ -14,13 +14,12 @@ import {
   DELETE_FEED_FULFILLED,
   DELETE_FEED_REJECTED,
 } from './actionTypes';
-import { setUrl } from '../../api/urls';
 import { defaultHeaders } from '../../api/headers';
 
-export function getNewsFeed() {
+export function getNewsFeed(feedUrl) {
   return async (dispatch) => {
     dispatch({ type: GET_NEWS_FEED_PENDING });
-    return await fetch(`${setUrl()}`, {
+    return await fetch(feedUrl, {
       headers: defaultHeaders(),
       method: 'GET',
     })
