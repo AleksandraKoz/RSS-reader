@@ -16,7 +16,12 @@ import { addNewFeed } from '../../store/News/actions';
 import FeedList from './FeedList';
 import Wrapper from '../components/Wrapper';
 
-const FeedInput = ({ addNewFeed, newsFeeds }) => {
+interface IFeedInput {
+  addNewFeed: (url: string) => void;
+  newsFeeds: string[];
+}
+
+const FeedInput = ({ addNewFeed, newsFeeds }: IFeedInput): React.JSX.Element => {
   const [newUrl, setNewUrl] = useState<string>('');
 
   const addNewFeedOnClick = () => {
