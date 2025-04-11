@@ -76,7 +76,7 @@ export function updateFeed(updatedFeed, index) {
     } catch (error) {
       dispatch({
         type: UPDATE_FEED_REJECTED,
-        payload: { error },
+        payload: { error: "Couldn't update feed URL. Try again later." },
       });
     }
   };
