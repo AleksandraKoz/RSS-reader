@@ -19,7 +19,7 @@ interface INewsList {
       title: string;
       description: string;
       published: string;
-      enclosure: {};
+      enclosure: { url: string } | { url: string }[];
     };
   };
   getNewsFeed: (url: string) => void;
