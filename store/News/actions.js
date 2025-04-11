@@ -10,6 +10,9 @@ import {
   UPDATE_FEED_PENDING,
   UPDATE_FEED_FULFILLED,
   UPDATE_FEED_REJECTED,
+  DELETE_FEED_PENDING,
+  DELETE_FEED_FULFILLED,
+  DELETE_FEED_REJECTED,
 } from './actionTypes';
 import { setUrl } from '../../api/urls';
 import { defaultHeaders } from '../../api/headers';
@@ -77,6 +80,24 @@ export function updateFeed(updatedFeed, index) {
       dispatch({
         type: UPDATE_FEED_REJECTED,
         payload: { error: "Couldn't update feed URL. Try again later." },
+      });
+    }
+  };
+}
+
+export function removeFeed(index) {
+  return async (dispatch) => {
+    dispatch({ type: DELETE_FEED_PENDING });
+    console.log(index);
+    try {
+      dispatch({
+        type: DELETE_FEED_FULFILLED,
+        payload: { index: index },
+      });
+    } catch (error) {
+      dispatch({
+        type: DELETE_FEED_REJECTED,
+        payload: { error: "Couldn't remove feed URL. Try again later." },
       });
     }
   };

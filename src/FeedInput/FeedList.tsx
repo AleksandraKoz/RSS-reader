@@ -2,16 +2,17 @@ import React, { useState } from 'react';
 import { FlatList, Text, StyleSheet, Pressable } from 'react-native';
 import { connect } from 'react-redux';
 
-import { updateFeed } from '../../store/News/actions';
+import { removeFeed, updateFeed } from '../../store/News/actions';
 import Wrapper from '../components/Wrapper';
 import FeedModal from './FeedModal';
 
 interface IFeedList {
   feeds: string[];
   updateFeed: (newFeed: string, index: number) => void;
+  removeFeed: (index: number) => void;
 }
 
-const FeedList = ({ feeds, updateFeed }: IFeedList): React.JSX.Element => {
+const FeedList = ({ feeds, updateFeed, removeFeed }: IFeedList): React.JSX.Element => {
   const [selectedFeed, setSelectedFeed] = useState<string | null>(null);
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
   const [modalVisible, setModalVisible] = useState(false);
@@ -37,6 +38,10 @@ const FeedList = ({ feeds, updateFeed }: IFeedList): React.JSX.Element => {
   };
 
   const handleDelete = () => {
+    console.log(selectedIndex);
+    if (selectedIndex !== null) {
+      removeFeed(selectedIndex);
+    }
     setModalVisible(false);
   };
 
@@ -74,6 +79,7 @@ const FeedList = ({ feeds, updateFeed }: IFeedList): React.JSX.Element => {
 
 const mapDispatchToProps = (dispatch) => ({
   updateFeed: (feed, index) => dispatch(updateFeed(feed, index)),
+  removeFeed: (index) => dispatch(removeFeed(index)),
 });
 
 export default connect(null, mapDispatchToProps)(FeedList);

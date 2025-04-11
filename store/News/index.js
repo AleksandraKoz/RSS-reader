@@ -2,6 +2,9 @@ import {
   ADD_NEW_FEED_FULFILLED,
   ADD_NEW_FEED_PENDING,
   ADD_NEW_FEED_REJECTED,
+  DELETE_FEED_FULFILLED,
+  DELETE_FEED_PENDING,
+  DELETE_FEED_REJECTED,
   GET_NEWS_FEED_FULFILLED,
   GET_NEWS_FEED_PENDING,
   GET_NEWS_FEED_REJECTED,
@@ -16,6 +19,7 @@ const initialState = {
   newsFeeds: [],
   addFeedError: '',
   updateFeedError: '',
+  deleteFeedError: '',
 };
 
 export default (state = initialState, action) => {
@@ -26,6 +30,7 @@ export default (state = initialState, action) => {
         isPending: true,
         addFeedError: '',
         updateFeedError: '',
+        deleteFeedError: '',
       };
 
     case ADD_NEW_FEED_PENDING:
@@ -40,6 +45,13 @@ export default (state = initialState, action) => {
         ...state,
         isPending: true,
         updateFeedError: '',
+      };
+
+    case DELETE_FEED_PENDING:
+      return {
+        ...state,
+        isPending: true,
+        deleteFeedError: '',
       };
 
     case ADD_NEW_FEED_FULFILLED:
@@ -67,6 +79,22 @@ export default (state = initialState, action) => {
     }
 
     case UPDATE_FEED_REJECTED:
+      return {
+        ...state,
+        isPending: false,
+        updateFeedError: action.payload.error,
+      };
+
+    case DELETE_FEED_FULFILLED: {
+      const updatedFeeds = state.newsFeeds.filter((_, index) => index !== action.payload.index);
+      return {
+        ...state,
+        isPending: false,
+        newsFeeds: updatedFeeds,
+      };
+    }
+
+    case DELETE_FEED_REJECTED:
       return {
         ...state,
         isPending: false,
