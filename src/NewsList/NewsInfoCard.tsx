@@ -46,14 +46,6 @@ const styles = StyleSheet.create({
   titleText: {
     fontWeight: 'bold',
   },
-  wrapper: {
-    backgroundColor: 'rgba(241, 239, 236,1)',
-    borderRadius: 20,
-    flex: 1,
-    marginHorizontal: 15,
-    marginVertical: 5,
-    padding: 10,
-  },
 });
 
 export default NewsInfoCard;
