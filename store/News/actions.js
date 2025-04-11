@@ -7,6 +7,9 @@ import {
   ADD_NEW_FEED_PENDING,
   ADD_NEW_FEED_FULFILLED,
   ADD_NEW_FEED_REJECTED,
+  UPDATE_FEED_PENDING,
+  UPDATE_FEED_FULFILLED,
+  UPDATE_FEED_REJECTED,
 } from './actionTypes';
 import { setUrl } from '../../api/urls';
 import { defaultHeaders } from '../../api/headers';
@@ -46,7 +49,6 @@ export function addNewFeed(newFeed) {
     const { newsFeeds } = getState().news;
     const feedAlreadyExists = newsFeeds.includes(newFeed);
     if (feedAlreadyExists || (typeof newFeed === 'string' && !newFeed)) {
-      console.log(newFeed);
       dispatch({
         type: ADD_NEW_FEED_REJECTED,
         payload: {
@@ -59,5 +61,23 @@ export function addNewFeed(newFeed) {
       type: ADD_NEW_FEED_FULFILLED,
       payload: { data: newFeed },
     });
+  };
+}
+
+export function updateFeed(updatedFeed, index) {
+  return async (dispatch) => {
+    dispatch({ type: UPDATE_FEED_PENDING });
+
+    try {
+      dispatch({
+        type: UPDATE_FEED_FULFILLED,
+        payload: { data: updatedFeed, index: index },
+      });
+    } catch (error) {
+      dispatch({
+        type: UPDATE_FEED_REJECTED,
+        payload: { error },
+      });
+    }
   };
 }
