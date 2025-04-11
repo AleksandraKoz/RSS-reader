@@ -1,34 +1,54 @@
-import React from 'react';
-import { Text, View, SafeAreaView, TextInput, StyleSheet } from 'react-native';
+import React, { useState } from 'react';
+import {
+  Text,
+  View,
+  SafeAreaView,
+  TouchableOpacity,
+  TextInput,
+  Image,
+  StyleSheet,
+} from 'react-native';
 import { connect } from 'react-redux';
+import { addNewFeed } from '../../store/News/actions';
+import SaveIcon from '../../src/assets/save.png';
+import FeedList from './FeedList';
+import Wrapper from '../components/Wrapper';
 
-const FeedInput = ({}) => {
+const FeedInput = ({ addNewFeed, newsFeeds }) => {
+  const [newUrl, setNewUrl] = useState<string>('');
+
+  const addNewFeedOnClick = () => {
+    if (newUrl.trim()) {
+      addNewFeed(newUrl.trim());
+      setNewUrl('');
+    }
+  };
+
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: 'rgba(212, 201, 190, 1)' }}>
-      <View style={styles.wrapper}>
+      <Wrapper>
         <Text style={styles.titleText}>Welcome in Newsly!</Text>
         <Text style={styles.descriptionText}>Your friendly RSS reader</Text>
         <View style={styles.inputWrapper}>
           <Text style={styles.descriptionText}>
             Please insert the feed that you want to browse in your app :)
           </Text>
-          <TextInput
-            placeholder="https://example.com/rss"
-            placeholderTextColor="rgba(18, 52, 88, 0.5)"
-            style={styles.input}
-            keyboardType="url"
-          />
+          <View style={styles.inputRow}>
+            <TextInput
+              value={newUrl}
+              onChangeText={setNewUrl}
+              placeholder="https://example.com/rss"
+              placeholderTextColor="rgba(18, 52, 88, 0.5)"
+              style={styles.input}
+              keyboardType="url"
+            />
+            <TouchableOpacity onPress={addNewFeedOnClick}>
+              <Image source={SaveIcon} style={styles.saveIcon} />
+            </TouchableOpacity>
+          </View>
         </View>
-      </View>
-      <View style={styles.wrapper}>
-        <Text style={styles.subtitleText}>Here are your current feeds:</Text>
-        <TextInput
-          placeholder="https://example.com/rss"
-          placeholderTextColor="rgba(18, 52, 88, 0.5)"
-          style={styles.input}
-          keyboardType="url"
-        />
-      </View>
+      </Wrapper>
+      <FeedList feeds={newsFeeds} />
     </SafeAreaView>
   );
 };
@@ -45,44 +65,41 @@ const styles = StyleSheet.create({
     borderRadius: 12,
     borderWidth: 1,
     color: 'rgba(18, 52, 88,1)',
-    elevation: 2,
+    flex: 1,
     fontSize: 16,
-    marginTop: 12,
     paddingHorizontal: 16,
-    paddingVertical: 12,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.05,
-    shadowRadius: 4,
+    paddingVertical: 10,
+  },
+  inputRow: {
+    alignItems: 'center',
+    flexDirection: 'row',
+    gap: 10,
+    marginTop: 12,
   },
   inputWrapper: {
+    marginBottom: 10,
     marginHorizontal: 15,
-    marginTop: 50,
+    marginTop: 30,
   },
-  subtitleText: {
-    color: 'rgba(18, 52, 88,1)',
-    fontSize: 20,
-    fontWeight: 'bold',
-    textAlign: 'center',
+  saveIcon: {
+    height: 24,
+    width: 24,
   },
   titleText: {
     color: 'rgba(18, 52, 88,1)',
     fontSize: 25,
     fontWeight: 'bold',
+    marginVertical: 10,
     textAlign: 'center',
-  },
-  wrapper: {
-    backgroundColor: 'rgba(241, 239, 236,1)',
-    borderRadius: 20,
-    marginHorizontal: 15,
-    marginVertical: 5,
-    paddingHorizontal: 15,
-    paddingVertical: 30,
   },
 });
 
-const mapStateToProps = (state) => ({});
+const mapStateToProps = (state) => ({
+  newsFeeds: state.news.newsFeeds,
+});
 
-const mapDispatchToProps = (dispatch) => ({});
+const mapDispatchToProps = (dispatch) => ({
+  addNewFeed: (feed) => dispatch(addNewFeed(feed)),
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(FeedInput);
