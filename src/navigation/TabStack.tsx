@@ -2,6 +2,7 @@ import React, { useRef } from 'react';
 import { Text, TouchableOpacity, StyleSheet, ViewStyle } from 'react-native';
 import { CurvedBottomBar, ICurvedBottomBarRef } from 'react-native-curved-bottom-bar';
 import NewsList from '../NewsList';
+import FeedInput from '../FeedInput';
 
 export type TabRoutes = 'NewsList' | 'NewsList1' | 'NewsList2';
 
@@ -24,7 +25,7 @@ const TabStack = (): React.JSX.Element => {
     <CurvedBottomBar.Navigator
       ref={ref}
       type="UP"
-      height={55}
+      height={65}
       circleWidth={50}
       circlePosition="CENTER"
       initialRouteName="NewsList"
@@ -34,8 +35,8 @@ const TabStack = (): React.JSX.Element => {
       tabBar={(props) => <TabBarIcon {...props} />}
       renderCircle={(props) => <TabBarIcon {...props} />}
     >
-      <CurvedBottomBar.Screen name="NewsList" position="LEFT" component={NewsList} />
-      <CurvedBottomBar.Screen name="NewsList2" position="CIRCLE" component={NewsList} />
+      <CurvedBottomBar.Screen name="FeedInput" position="LEFT" component={FeedInput} />
+      <CurvedBottomBar.Screen name="NewsList" position="CIRCLE" component={NewsList} />
       <CurvedBottomBar.Screen name="NewsList1" position="RIGHT" component={NewsList} />
     </CurvedBottomBar.Navigator>
   );

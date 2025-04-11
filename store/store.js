@@ -7,8 +7,10 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import newsReducer from './News';
 
 const persistConfig = {
-  key: 'root',
+  key: 'news',
   storage: AsyncStorage,
+  whitelist: ['newsFeeds'],
+  serialize: true,
 };
 
 const rootReducer = combineReducers({

@@ -1,6 +1,7 @@
 import React from 'react';
 import { Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+import Wrapper from '../components/Wrapper.tsx';
 
 interface INewsInfoCard {
   title: string;
@@ -18,11 +19,13 @@ const NewsInfoCard = ({ title, description, date, images }: INewsInfoCard): Reac
   };
 
   return (
-    <TouchableOpacity onPress={onCardClick} style={styles.wrapper}>
-      {images ? <Image source={{ uri: images }} style={styles.image} /> : null}
-      <Text style={styles.titleText}>{title}</Text>
-      <Text numberOfLines={4}>{description}</Text>
-      <Text style={styles.date}>{date}</Text>
+    <TouchableOpacity onPress={onCardClick}>
+      <Wrapper>
+        {images ? <Image source={{ uri: images }} style={styles.image} /> : null}
+        <Text style={styles.titleText}>{title}</Text>
+        <Text numberOfLines={4}>{description}</Text>
+        <Text style={styles.date}>{date}</Text>
+      </Wrapper>
     </TouchableOpacity>
   );
 };
@@ -42,14 +45,6 @@ const styles = StyleSheet.create({
   },
   titleText: {
     fontWeight: 'bold',
-  },
-  wrapper: {
-    backgroundColor: 'rgba(241, 239, 236,1)',
-    borderRadius: 20,
-    flex: 1,
-    marginHorizontal: 15,
-    marginVertical: 5,
-    padding: 10,
   },
 });
 
