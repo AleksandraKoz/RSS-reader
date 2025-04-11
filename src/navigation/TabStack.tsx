@@ -25,7 +25,7 @@ const TabStack = (): React.JSX.Element => {
     <CurvedBottomBar.Navigator
       ref={ref}
       type="UP"
-      height={55}
+      height={65}
       circleWidth={50}
       circlePosition="CENTER"
       initialRouteName="NewsList"
