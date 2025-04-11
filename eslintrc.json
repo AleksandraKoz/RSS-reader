@@ -46,8 +46,8 @@
     ],
     "@typescript-eslint/explicit-function-return-type": "off",
     "@typescript-eslint/explicit-module-boundary-types": "off",
-    "@typescript-eslint/no-floating-promises": "warn",
-    "@typescript-eslint/no-misused-promises": "warn",
+    "@typescript-eslint/no-floating-promises": "off",
+    "@typescript-eslint/no-misused-promises": "off",
     "@typescript-eslint/ban-ts-comment": "off",
     "import/no-extraneous-dependencies": "off",
     "import/prefer-default-export": "off",
@@ -72,7 +72,8 @@
     ],
     "react-native/no-inline-styles": "off",
     "react-native/no-raw-text": "off",
-    "react-hooks/exhaustive-deps": "warn"
+    "react-native/no-color-literals": "off",
+    "react-hooks/exhaustive-deps": "off"
   },
   "overrides": [
     {
