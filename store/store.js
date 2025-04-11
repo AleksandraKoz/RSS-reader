@@ -14,17 +14,15 @@ const persistConfig = {
 };
 
 const rootReducer = combineReducers({
-  news: newsReducer,
+  news: persistReducer(persistConfig, newsReducer),
 });
-
-const persistedReducer = persistReducer(persistConfig, rootReducer);
 
 const middlewares = [thunk];
 if (__DEV__) {
   middlewares.push(logger);
 }
 
-const store = createStore(persistedReducer, applyMiddleware(...middlewares));
+const store = createStore(rootReducer, applyMiddleware(...middlewares));
 
 const persistor = persistStore(store);
 
