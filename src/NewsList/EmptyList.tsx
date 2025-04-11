@@ -10,7 +10,7 @@ interface IEmptyList {
 const EmptyList = ({ feedUrl }: IEmptyList): React.JSX.Element => {
   return (
     <Wrapper>
-      <Text style={styles.titleText}>No articles found in the "{feedUrl}" feed.</Text>
+      <Text style={styles.titleText}>No articles found in the {`${feedUrl}`} feed.</Text>
     </Wrapper>
   );
 };
