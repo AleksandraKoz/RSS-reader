@@ -50,6 +50,9 @@ const FeedList = ({ feeds, updateFeed }: IFeedList): React.JSX.Element => {
     <>
       <Wrapper>
         <Text style={styles.subtitleText}>List of your current feeds:</Text>
+        <Text style={styles.descriptionText}>
+          If you want to change the feed, click on it, modify and save the change :)
+        </Text>
         <FlatList
           data={feeds}
           keyExtractor={(item, index) => `${item}-${index}`}
@@ -76,6 +79,11 @@ const mapDispatchToProps = (dispatch) => ({
 export default connect(null, mapDispatchToProps)(FeedList);
 
 const styles = StyleSheet.create({
+  descriptionText: {
+    color: 'rgba(18, 52, 88,1)',
+    fontSize: 15,
+    textAlign: 'center',
+  },
   feedItem: {
     backgroundColor: '#fff',
     borderRadius: 10,
