@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { FlatList, Text, StyleSheet, Pressable } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 import { connect } from 'react-redux';
 
-import { removeFeed, updateFeed } from '../../store/News/actions';
+import { getNewsFeed, removeFeed, updateFeed } from '../../store/News/actions';
 import Wrapper from '../components/Wrapper';
 import FeedModal from './FeedModal';
 
@@ -10,19 +11,27 @@ interface IFeedList {
   feeds: string[];
   updateFeed: (newFeed: string, index: number) => void;
   removeFeed: (index: number) => void;
+  getNewsFeed: (feedUrl: string) => void;
 }
 
-const FeedList = ({ feeds, updateFeed, removeFeed }: IFeedList): React.JSX.Element => {
+const FeedList = ({ feeds, updateFeed, removeFeed, getNewsFeed }: IFeedList): React.JSX.Element => {
   const [selectedFeed, setSelectedFeed] = useState<string | null>(null);
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
   const [modalVisible, setModalVisible] = useState(false);
   const [updatedFeed, setUpdatedFeed] = useState('');
 
-  const handlePress = (feed: string, index: number) => {
+  const navigation = useNavigation();
+
+  const handleLongPress = (feed: string, index: number) => {
     setSelectedFeed(feed);
     setSelectedIndex(index);
     setUpdatedFeed(feed);
     setModalVisible(true);
+  };
+
+  const handlePress = (feedUrl) => {
+    navigation.navigate('NewsList', { feedUrl });
+    getNewsFeed(feedUrl);
   };
 
   const handleSave = () => {
@@ -46,7 +55,11 @@ const FeedList = ({ feeds, updateFeed, removeFeed }: IFeedList): React.JSX.Eleme
   };
 
   const renderFeedItem = ({ item, index }: { item: string; index: number }) => (
-    <Pressable onPress={() => handlePress(item, index)} style={styles.feedItem}>
+    <Pressable
+      onPress={() => handlePress(item)}
+      onLongPress={() => handleLongPress(item, index)}
+      style={styles.feedItem}
+    >
       <Text style={styles.feedUrl}>{item}</Text>
     </Pressable>
   );
@@ -80,6 +93,7 @@ const FeedList = ({ feeds, updateFeed, removeFeed }: IFeedList): React.JSX.Eleme
 const mapDispatchToProps = (dispatch) => ({
   updateFeed: (feed, index) => dispatch(updateFeed(feed, index)),
   removeFeed: (index) => dispatch(removeFeed(index)),
+  getNewsFeed: (feedUrl) => dispatch(getNewsFeed(feedUrl)),
 });
 
 export default connect(null, mapDispatchToProps)(FeedList);
