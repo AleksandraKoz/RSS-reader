@@ -1,8 +1,9 @@
 import React from 'react';
 import { Image, StyleSheet, Text, View } from 'react-native';
 
-import Wrapper from '../components/Wrapper.tsx';
 import SadEmojiIcon from '../assets/sad.png';
+
+import Wrapper from '../components/Wrapper.tsx';
 
 interface IEmptyList {
   feedUrl: string;
