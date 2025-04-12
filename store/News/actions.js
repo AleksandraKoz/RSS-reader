@@ -90,7 +90,6 @@ export function updateFeed(updatedFeed, index) {
 export function removeFeed(index) {
   return async (dispatch) => {
     dispatch({ type: DELETE_FEED_PENDING });
-    console.log(index);
     try {
       dispatch({
         type: DELETE_FEED_FULFILLED,
