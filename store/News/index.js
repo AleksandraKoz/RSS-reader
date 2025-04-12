@@ -15,7 +15,7 @@ import {
 
 const initialState = {
   isPending: false,
-  newsDetails: {},
+  allNews: null,
   newsFeeds: [],
   addFeedError: '',
   updateFeedError: '',
@@ -104,12 +104,13 @@ export default (state = initialState, action) => {
       return {
         ...state,
         isPending: false,
-        newsDetails: action.payload.data,
+        allNews: action.payload.data,
       };
 
     case GET_NEWS_FEED_REJECTED:
       return {
         ...state,
+        allNews: null,
         isPending: false,
         getNewsError: action.payload.error,
       };

@@ -4,7 +4,6 @@ import { RouteProp, useRoute } from '@react-navigation/native';
 import { connect } from 'react-redux';
 
 import { MainStackParamList } from '../navigation/MainStack';
-import { getNewsFeed } from '../../store/News/actions';
 import NewsInfoCard from './NewsInfoCard';
 import NewsListHeader from './NewsListHeader';
 import EmptyList from './EmptyList.tsx';
@@ -12,7 +11,7 @@ import EmptyList from './EmptyList.tsx';
 type NewsListRouteProp = RouteProp<MainStackParamList, 'NewsList'>;
 
 interface INewsList {
-  newsDetails: {
+  allNews: {
     title: string;
     description: string;
     items: {
@@ -22,18 +21,17 @@ interface INewsList {
       enclosure: { url: string } | { url: string }[];
     };
   };
-  getNewsFeed: (url: string) => void;
 }
 
-const NewsList = ({ newsDetails }: INewsList): React.JSX.Element => {
+const NewsList = ({ allNews }: INewsList): React.JSX.Element => {
   const route = useRoute<NewsListRouteProp>();
   const { feedUrl } = route?.params;
 
   return (
     <SafeAreaView style={{ backgroundColor: 'rgba(212, 201, 190, 1)', flex: 1 }}>
-      {newsDetails ? (
+      {allNews ? (
         <FlatList
-          data={newsDetails?.items}
+          data={allNews?.items}
           keyExtractor={(item) => item.id}
           renderItem={({ item }) => (
             <NewsInfoCard
@@ -44,7 +42,7 @@ const NewsList = ({ newsDetails }: INewsList): React.JSX.Element => {
             />
           )}
           ListHeaderComponent={
-            <NewsListHeader title={newsDetails?.title} description={newsDetails?.description} />
+            <NewsListHeader title={allNews?.title} description={allNews?.description} />
           }
         />
       ) : (
@@ -55,11 +53,7 @@ const NewsList = ({ newsDetails }: INewsList): React.JSX.Element => {
 };
 
 const mapStateToProps = (state) => ({
-  newsDetails: state.news.newsDetails,
+  allNews: state.news.allNews,
 });
 
-const mapDispatchToProps = (dispatch) => ({
-  getNewsFeed: (feedUrl: string) => dispatch(getNewsFeed(feedUrl)),
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(NewsList);
+export default connect(mapStateToProps)(NewsList);
