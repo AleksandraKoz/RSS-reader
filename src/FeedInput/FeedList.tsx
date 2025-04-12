@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
-import { FlatList, Text, StyleSheet, Pressable } from 'react-native';
+import { FlatList, Text, StyleSheet, Pressable, Image, TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { connect } from 'react-redux';
+
+import EditIcon from '../assets/edit.png';
 
 import { getNewsFeed, removeFeed, updateFeed } from '../../store/News/actions';
 import Wrapper from '../components/Wrapper';
@@ -55,12 +57,11 @@ const FeedList = ({ feeds, updateFeed, removeFeed, getNewsFeed }: IFeedList): Re
   };
 
   const renderFeedItem = ({ item, index }: { item: string; index: number }) => (
-    <Pressable
-      onPress={() => handlePress(item)}
-      onLongPress={() => handleLongPress(item, index)}
-      style={styles.feedItem}
-    >
+    <Pressable key={item} onPress={() => handlePress(item)} style={styles.feedItem}>
       <Text style={styles.feedUrl}>{item}</Text>
+      <TouchableOpacity onPress={() => handleLongPress(item, index)}>
+        <Image source={EditIcon} style={{ height: 20, width: 20 }} />
+      </TouchableOpacity>
     </Pressable>
   );
 
@@ -68,8 +69,9 @@ const FeedList = ({ feeds, updateFeed, removeFeed, getNewsFeed }: IFeedList): Re
     <>
       <Wrapper>
         <Text style={styles.subtitleText}>List of your current feeds:</Text>
+        <Text style={styles.descriptionText}>Click on the feed that you want to see :)</Text>
         <Text style={styles.descriptionText}>
-          If you want to change the feed, click on it, modify and save the change :)
+          If you want to change the feed, click on modify icon next to it and save the change.
         </Text>
         <FlatList
           data={feeds}
@@ -102,12 +104,15 @@ const styles = StyleSheet.create({
   descriptionText: {
     color: 'rgba(18, 52, 88,1)',
     fontSize: 15,
+    paddingBottom: 10,
     textAlign: 'center',
   },
   feedItem: {
     backgroundColor: '#fff',
     borderRadius: 10,
     elevation: 2,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
     marginBottom: 10,
     paddingHorizontal: 16,
     paddingVertical: 12,
