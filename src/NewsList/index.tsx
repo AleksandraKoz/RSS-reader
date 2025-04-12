@@ -21,15 +21,16 @@ interface INewsList {
       enclosure: { url: string } | { url: string }[];
     };
   };
+  isPending: boolean;
 }
 
-const NewsList = ({ allNews }: INewsList): React.JSX.Element => {
+const NewsList = ({ allNews, isPending }: INewsList): React.JSX.Element => {
   const route = useRoute<NewsListRouteProp>();
   const { feedUrl } = route?.params;
 
   return (
     <SafeAreaView style={{ backgroundColor: 'rgba(212, 201, 190, 1)', flex: 1 }}>
-      {allNews ? (
+      {allNews || isPending ? (
         <FlatList
           data={allNews?.items}
           keyExtractor={(item) => item.id}
@@ -54,6 +55,7 @@ const NewsList = ({ allNews }: INewsList): React.JSX.Element => {
 
 const mapStateToProps = (state) => ({
   allNews: state.news.allNews,
+  isPending: state.news.isPending,
 });
 
 export default connect(mapStateToProps)(NewsList);
