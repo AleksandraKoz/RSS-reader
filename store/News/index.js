@@ -15,7 +15,7 @@ import {
 
 const initialState = {
   isPending: false,
-  allNews: null,
+  allNews: {},
   newsFeeds: [],
   addFeedError: '',
   updateFeedError: '',
