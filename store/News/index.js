@@ -15,11 +15,12 @@ import {
 
 const initialState = {
   isPending: false,
-  newsDetails: {},
+  allNews: {},
   newsFeeds: [],
   addFeedError: '',
   updateFeedError: '',
   deleteFeedError: '',
+  getNewsError: '',
 };
 
 export default (state = initialState, action) => {
@@ -28,9 +29,7 @@ export default (state = initialState, action) => {
       return {
         ...state,
         isPending: true,
-        addFeedError: '',
-        updateFeedError: '',
-        deleteFeedError: '',
+        getNewsError: '',
       };
 
     case ADD_NEW_FEED_PENDING:
@@ -87,10 +86,15 @@ export default (state = initialState, action) => {
 
     case DELETE_FEED_FULFILLED: {
       const updatedFeeds = state.newsFeeds.filter((_, index) => index !== action.payload.index);
+
+      const updatedAllNews = { ...state.allNews };
+      delete updatedAllNews[state.newsFeeds[action.payload.index]];
+
       return {
         ...state,
         isPending: false,
         newsFeeds: updatedFeeds,
+        allNews: updatedAllNews,
       };
     }
 
@@ -101,12 +105,23 @@ export default (state = initialState, action) => {
         updateFeedError: action.payload.error,
       };
 
-    case GET_NEWS_FEED_FULFILLED:
+    case GET_NEWS_FEED_FULFILLED: {
+      return {
+        ...state,
+        isPending: false,
+        allNews: {
+          ...state.allNews,
+          [action.payload.feedUrl]: action.payload.data,
+        },
+      };
+    }
+
     case GET_NEWS_FEED_REJECTED:
       return {
         ...state,
-        isPending: true,
-        newsDetails: action.payload.data,
+        allNews: null,
+        isPending: false,
+        getNewsError: action.payload.error,
       };
     default:
       return state;

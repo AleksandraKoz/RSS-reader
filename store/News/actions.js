@@ -14,13 +14,12 @@ import {
   DELETE_FEED_FULFILLED,
   DELETE_FEED_REJECTED,
 } from './actionTypes';
-import { setUrl } from '../../api/urls';
 import { defaultHeaders } from '../../api/headers';
 
-export function getNewsFeed() {
+export function getNewsFeed(feedUrl) {
   return async (dispatch) => {
     dispatch({ type: GET_NEWS_FEED_PENDING });
-    return await fetch(`${setUrl()}`, {
+    return await fetch(feedUrl, {
       headers: defaultHeaders(),
       method: 'GET',
     })
@@ -34,7 +33,10 @@ export function getNewsFeed() {
       .then((responseData) =>
         dispatch({
           type: GET_NEWS_FEED_FULFILLED,
-          payload: { data: responseData },
+          payload: {
+            feedUrl,
+            data: responseData,
+          },
         })
       )
       .catch((error) =>
@@ -88,7 +90,6 @@ export function updateFeed(updatedFeed, index) {
 export function removeFeed(index) {
   return async (dispatch) => {
     dispatch({ type: DELETE_FEED_PENDING });
-    console.log(index);
     try {
       dispatch({
         type: DELETE_FEED_FULFILLED,

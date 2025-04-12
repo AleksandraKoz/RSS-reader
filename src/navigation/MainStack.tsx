@@ -1,11 +1,13 @@
 import React from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { NavigationContainer } from '@react-navigation/native';
-import TabStack from './TabStack';
 import NewsDetails from '../NewsDetails';
+import NewsList from '../NewsList';
+import FeedInput from '../FeedInput';
 
 export type MainStackParamList = {
-  TabStack: undefined;
+  NewsList: never;
+  FeedInput: never;
   NewsDetails: {
     newsItem: {
       title: string;
@@ -21,8 +23,9 @@ const Stack = createNativeStackNavigator<MainStackParamList>();
 const MainStack = (): React.JSX.Element => {
   return (
     <NavigationContainer>
-      <Stack.Navigator screenOptions={{ headerShown: false }} initialRouteName="TabStack">
-        <Stack.Screen name="TabStack" component={TabStack} />
+      <Stack.Navigator screenOptions={{ headerShown: false }} initialRouteName="FeedInput">
+        <Stack.Screen name="FeedInput" component={FeedInput} />
+        <Stack.Screen name="NewsList" component={NewsList} />
         <Stack.Screen name="NewsDetails" component={NewsDetails} />
       </Stack.Navigator>
     </NavigationContainer>
