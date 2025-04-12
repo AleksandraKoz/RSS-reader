@@ -1,5 +1,5 @@
 import React from 'react';
-import { Image, Pressable, StyleSheet, Text, TouchableOpacity } from 'react-native';
+import { Image, Pressable, StyleSheet, View, Text, TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { connect } from 'react-redux';
 
@@ -29,9 +29,13 @@ const FeedListItem = ({
 
   return (
     <Pressable key={name} onPress={() => handlePress(name)} style={styles.feedItem}>
-      <Text style={styles.feedUrl}>{name}</Text>
-      <TouchableOpacity onPress={() => (onClickEdit ? onClickEdit(name, index) : () => {})}>
-        <Image source={EditIcon} style={{ height: 20, width: 20 }} />
+      <View style={styles.textWrapper}>
+        <Text style={styles.feedUrl} numberOfLines={2} ellipsizeMode="tail">
+          {name}
+        </Text>
+      </View>
+      <TouchableOpacity onPress={() => onClickEdit?.(name, index)} style={styles.iconWrapper}>
+        <Image source={EditIcon} style={styles.icon} />
       </TouchableOpacity>
     </Pressable>
   );
@@ -45,10 +49,12 @@ export default connect(null, mapDispatchToProps)(FeedListItem);
 
 const styles = StyleSheet.create({
   feedItem: {
+    alignItems: 'center',
     backgroundColor: '#fff',
     borderRadius: 10,
     elevation: 2,
     flexDirection: 'row',
+    gap: 12,
     justifyContent: 'space-between',
     marginBottom: 10,
     paddingHorizontal: 16,
@@ -56,6 +62,20 @@ const styles = StyleSheet.create({
   },
   feedUrl: {
     color: 'rgba(18, 52, 88,1)',
+    flexShrink: 1,
+    flexWrap: 'wrap',
     fontSize: 15,
+  },
+  icon: {
+    height: 20,
+    width: 20,
+  },
+  iconWrapper: {
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  textWrapper: {
+    flex: 1,
+    paddingRight: 10,
   },
 });
