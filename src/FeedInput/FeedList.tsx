@@ -2,11 +2,12 @@ import React, { useState } from 'react';
 import { FlatList, StyleSheet, Text } from 'react-native';
 import { connect } from 'react-redux';
 
-import { removeFeed, updateFeed } from '../../store/News/actions';
+import { getNewsFeed, removeFeed, updateFeed } from '../../store/News/actions';
 import Wrapper from '../components/Wrapper';
 import FeedModal from './FeedModal';
 import FeedListItem from './FeedListItem.tsx';
 import Button from '../components/Button.tsx';
+import { useNavigation } from '@react-navigation/native';
 
 interface IFeedList {
   feeds: string[];
@@ -19,6 +20,8 @@ const FeedList = ({ feeds, updateFeed, removeFeed }: IFeedList): React.JSX.Eleme
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
   const [modalVisible, setModalVisible] = useState(false);
   const [updatedFeed, setUpdatedFeed] = useState('');
+
+  const navigation = useNavigation();
 
   const handleEdit = (feed: string, index: number) => {
     setSelectedFeed(feed);
@@ -46,6 +49,12 @@ const FeedList = ({ feeds, updateFeed, removeFeed }: IFeedList): React.JSX.Eleme
     setModalVisible(false);
   };
 
+  const handlePressAll = async () => {
+    const feedPromises = feeds.map((feedUrl) => getNewsFeed(feedUrl));
+    await Promise.all(feedPromises);
+    navigation.navigate('NewsList', { feedUrl: 'Show all', showAll: true });
+  };
+
   return (
     <>
       <Wrapper>
@@ -61,6 +70,9 @@ const FeedList = ({ feeds, updateFeed, removeFeed }: IFeedList): React.JSX.Eleme
             <FeedListItem name={item} index={index} onClickEdit={() => handleEdit(item, index)} />
           )}
           contentContainerStyle={styles.feedList}
+          ListFooterComponent={
+            <Button title="Show all" variant="primary" onPress={() => handlePressAll()} />
+          }
         />
       </Wrapper>
       <FeedModal

@@ -11,9 +11,15 @@ interface IFeedListItem {
   name: string;
   index: number;
   onClickEdit: (name: string, id: number) => void;
+  getNewsFeed: (url: string) => void;
 }
 
-const FeedListItem = ({ name, index, onClickEdit }: IFeedListItem): React.JSX.Element => {
+const FeedListItem = ({
+  name,
+  index,
+  onClickEdit,
+  getNewsFeed,
+}: IFeedListItem): React.JSX.Element => {
   const navigation = useNavigation();
 
   const handlePress = (feedUrl) => {

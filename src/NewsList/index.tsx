@@ -6,33 +6,46 @@ import { connect } from 'react-redux';
 import { MainStackParamList } from '../navigation/MainStack';
 import NewsInfoCard from './NewsInfoCard';
 import NewsListHeader from './NewsListHeader';
-import EmptyList from './EmptyList.tsx';
+import EmptyList from './EmptyList';
 
 type NewsListRouteProp = RouteProp<MainStackParamList, 'NewsList'>;
 
-interface INewsList {
+interface INewsListProps {
   allNews: {
-    title: string;
-    description: string;
-    items: {
-      title: string;
-      description: string;
-      published: string;
-      enclosure: { url: string } | { url: string }[];
+    [feedUrl: string]: {
+      title?: string;
+      description?: string;
+      items: Array<{
+        id: string;
+        title: string;
+        description: string;
+        published: string;
+        enclosure?: { url: string } | { url: string }[];
+      }>;
     };
   };
   isPending: boolean;
 }
 
-const NewsList = ({ allNews, isPending }: INewsList): React.JSX.Element => {
+const NewsList = ({ allNews, isPending }: INewsListProps): React.JSX.Element => {
   const route = useRoute<NewsListRouteProp>();
-  const { feedUrl } = route?.params;
+  const { feedUrl, showAll } = route.params;
+
+  const newsFeed = showAll
+    ? {
+        title: 'All News',
+        description: 'Combined feed from all sources',
+        items: Object.values(allNews)
+          .map((feed) => feed.items || [])
+          .flat(),
+      }
+    : allNews?.[feedUrl];
 
   return (
     <SafeAreaView style={{ backgroundColor: 'rgba(212, 201, 190, 1)', flex: 1 }}>
-      {allNews || isPending ? (
+      {(newsFeed && newsFeed?.items?.length > 0) || isPending ? (
         <FlatList
-          data={allNews?.items}
+          data={newsFeed?.items}
           keyExtractor={(item) => item.id}
           renderItem={({ item }) => (
             <NewsInfoCard
@@ -43,7 +56,10 @@ const NewsList = ({ allNews, isPending }: INewsList): React.JSX.Element => {
             />
           )}
           ListHeaderComponent={
-            <NewsListHeader title={allNews?.title} description={allNews?.description} />
+            <NewsListHeader
+              title={newsFeed?.title || feedUrl}
+              description={newsFeed?.description || ''}
+            />
           }
         />
       ) : (

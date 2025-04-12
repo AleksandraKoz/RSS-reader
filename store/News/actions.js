@@ -33,7 +33,10 @@ export function getNewsFeed(feedUrl) {
       .then((responseData) =>
         dispatch({
           type: GET_NEWS_FEED_FULFILLED,
-          payload: { data: responseData },
+          payload: {
+            feedUrl,
+            data: responseData,
+          },
         })
       )
       .catch((error) =>

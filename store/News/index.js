@@ -86,10 +86,15 @@ export default (state = initialState, action) => {
 
     case DELETE_FEED_FULFILLED: {
       const updatedFeeds = state.newsFeeds.filter((_, index) => index !== action.payload.index);
+
+      const updatedAllNews = { ...state.allNews };
+      delete updatedAllNews[state.newsFeeds[action.payload.index]];
+
       return {
         ...state,
         isPending: false,
         newsFeeds: updatedFeeds,
+        allNews: updatedAllNews,
       };
     }
 
@@ -100,12 +105,16 @@ export default (state = initialState, action) => {
         updateFeedError: action.payload.error,
       };
 
-    case GET_NEWS_FEED_FULFILLED:
+    case GET_NEWS_FEED_FULFILLED: {
       return {
         ...state,
         isPending: false,
-        allNews: action.payload.data,
+        allNews: {
+          ...state.allNews,
+          [action.payload.feedUrl]: action.payload.data,
+        },
       };
+    }
 
     case GET_NEWS_FEED_REJECTED:
       return {
