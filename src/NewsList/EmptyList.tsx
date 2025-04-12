@@ -1,7 +1,8 @@
 import React from 'react';
-import { StyleSheet, Text } from 'react-native';
+import { Image, StyleSheet, Text, View } from 'react-native';
 
 import Wrapper from '../components/Wrapper.tsx';
+import SadEmojiIcon from '../assets/sad.png';
 
 interface IEmptyList {
   feedUrl: string;
@@ -9,15 +10,25 @@ interface IEmptyList {
 
 const EmptyList = ({ feedUrl }: IEmptyList): React.JSX.Element => {
   return (
-    <Wrapper>
-      <Text style={styles.titleText}>No articles found in the {`${feedUrl}`} feed.</Text>
-    </Wrapper>
+    <View>
+      <Image source={SadEmojiIcon} style={styles.sadEmojiIcon} />
+      <Wrapper>
+        <Text style={styles.titleText}>No articles found in the {`"${feedUrl}"`} feed.</Text>
+      </Wrapper>
+    </View>
   );
 };
 
 export default EmptyList;
 
 const styles = StyleSheet.create({
+  sadEmojiIcon: {
+    alignSelf: 'center',
+    height: 200,
+    marginBottom: 20,
+    marginTop: 50,
+    resizeMode: 'contain',
+  },
   titleText: {
     color: 'rgba(18, 52, 88,1)',
     fontSize: 20,
