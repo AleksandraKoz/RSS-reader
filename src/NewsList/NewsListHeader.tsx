@@ -1,17 +1,32 @@
 import React from 'react';
-import { Text, View, StyleSheet } from 'react-native';
+import { Text, StyleSheet, TextInput } from 'react-native';
+import Wrapper from '../components/Wrapper.tsx';
 
 interface INewsListHeader {
   title: string;
   description: string;
+  searchedTitle: string;
+  setSearchedTitle: (search: string) => void;
 }
 
-const NewsListHeader = ({ title, description }: INewsListHeader): React.JSX.Element => {
+const NewsListHeader = ({
+  title,
+  description,
+  searchedTitle,
+  setSearchedTitle,
+}: INewsListHeader): React.JSX.Element => {
   return (
-    <View style={styles.wrapper}>
+    <Wrapper>
       <Text style={styles.titleText}>{title}</Text>
       <Text style={styles.descriptionText}>{description}</Text>
-    </View>
+      <TextInput
+        value={searchedTitle}
+        onChangeText={setSearchedTitle}
+        placeholder="Search by news title"
+        placeholderTextColor="rgba(18, 52, 88, 0.5)"
+        style={styles.input}
+      />
+    </Wrapper>
   );
 };
 
@@ -20,6 +35,18 @@ const styles = StyleSheet.create({
     color: 'rgba(18, 52, 88,1)',
     fontSize: 15,
     textAlign: 'center',
+  },
+  input: {
+    backgroundColor: '#fff',
+    borderColor: 'rgba(18, 52, 88, 0.2)',
+    borderRadius: 12,
+    borderWidth: 1,
+    color: 'rgba(18, 52, 88,1)',
+    flex: 1,
+    fontSize: 16,
+    marginTop: 10,
+    paddingHorizontal: 16,
+    paddingVertical: 10,
   },
   titleText: {
     color: 'rgba(18, 52, 88,1)',

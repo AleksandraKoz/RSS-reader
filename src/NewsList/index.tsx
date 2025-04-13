@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { FlatList, SafeAreaView } from 'react-native';
 import { RouteProp, useRoute } from '@react-navigation/native';
 import { connect } from 'react-redux';
@@ -32,6 +32,7 @@ interface INewsListProps {
 const NewsList = ({ allNews, isPending, favouriteNews }: INewsListProps): React.JSX.Element => {
   const route = useRoute<NewsListRouteProp>();
   const { feedUrl, showAll } = route.params;
+  const [searchedTitle, setSearchedTitle] = useState<string>('');
 
   const getNewsList = () => {
     switch (showAll) {
@@ -66,7 +67,9 @@ const NewsList = ({ allNews, isPending, favouriteNews }: INewsListProps): React.
     <SafeAreaView style={{ backgroundColor: 'rgba(212, 201, 190, 1)', flex: 1 }}>
       {(newsFeed && newsFeed?.items?.length > 0) || isPending ? (
         <FlatList
-          data={newsFeed?.items}
+          data={newsFeed?.items?.filter((item) =>
+            item.title.toLowerCase().includes(searchedTitle.toLowerCase())
+          )}
           keyExtractor={(item, index) => `${item?.id}-${index}`}
           renderItem={({ item }) => (
             <NewsInfoCard
@@ -81,6 +84,8 @@ const NewsList = ({ allNews, isPending, favouriteNews }: INewsListProps): React.
             <NewsListHeader
               title={newsFeed?.title || feedUrl}
               description={newsFeed?.description || ''}
+              searchedTitle={searchedTitle}
+              setSearchedTitle={setSearchedTitle}
             />
           }
         />
