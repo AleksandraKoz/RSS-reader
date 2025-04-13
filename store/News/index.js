@@ -160,7 +160,7 @@ export default (state = initialState, action) => {
       };
 
     case REMOVE_FROM_FAVOURITE_FULFILLED:
-      const updatedFeeds = state.newsFeeds.filter((_, index) => index !== action.payload.data);
+      const updatedFeeds = state.favouriteNews.filter((name) => name !== action.payload.data);
 
       return {
         ...state,
