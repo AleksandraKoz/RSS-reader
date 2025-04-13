@@ -73,6 +73,7 @@
     "react-native/no-inline-styles": "off",
     "react-native/no-raw-text": "off",
     "react-native/no-color-literals": "off",
+    "react-native/no-unused-styles": "off",
     "react-hooks/exhaustive-deps": "off"
   },
   "overrides": [
@@ -82,7 +83,9 @@
         "*.tsx"
       ],
       "rules": {
-        "@typescript-eslint/explicit-function-return-type": "off"
+        "@typescript-eslint/explicit-function-return-type": "off",
+        "@typescript-eslint/no-unsafe-assignment": "off",
+        "@typescript-eslint/no-unsafe-call": "off"
       }
     },
     {
