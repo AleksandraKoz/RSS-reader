@@ -3,21 +3,31 @@ import { Image, SafeAreaView, ScrollView, StyleSheet, Text, View } from 'react-n
 import { RouteProp, useRoute } from '@react-navigation/native';
 import { MainStackParamList } from '../navigation/MainStack.tsx';
 import Button from '../components/Button.tsx';
-import { addToFavourite } from '../../store/News/actions';
+import { addToFavourite, removeFromFavourite } from '../../store/News/actions';
 import { connect } from 'react-redux';
 
 type NewsDetailsRouteProp = RouteProp<MainStackParamList, 'NewsDetails'>;
 
 interface INewsDetails {
   addToFavourite: (url: string) => void;
+  removeFromFavourite: (url: string) => void;
+  favouriteNews: string[];
 }
 
-const NewsDetails = ({ addToFavourite }: INewsDetails): React.JSX.Element => {
+const NewsDetails = ({
+  addToFavourite,
+  removeFromFavourite,
+  favouriteNews,
+}: INewsDetails): React.JSX.Element => {
   const route = useRoute<NewsDetailsRouteProp>();
   const { title, description, date, images, id } = route.params.newsItem;
 
-  const handleAddToFavourite = () => {
+  const handleAddFavourite = () => {
     addToFavourite(id);
+  };
+
+  const handleRemoveFavourite = () => {
+    removeFromFavourite(id);
   };
 
   return (
@@ -29,10 +39,13 @@ const NewsDetails = ({ addToFavourite }: INewsDetails): React.JSX.Element => {
           <Text style={styles.date}>{date.slice(0, 22)}</Text>
           <Text style={styles.description}>{description}</Text>
           <Button
-            title="Add to favourite"
-            onPress={() => {
-              handleAddToFavourite();
-            }}
+            variant={favouriteNews.includes(id) ? 'cancel' : 'primary'}
+            title={favouriteNews.includes(id) ? 'Remove from favourites' : 'Add to favourites'}
+            onPress={
+              favouriteNews.includes(id)
+                ? () => handleRemoveFavourite()
+                : () => handleAddFavourite()
+            }
             style={styles.buttonStyle}
           />
         </View>
@@ -40,12 +53,16 @@ const NewsDetails = ({ addToFavourite }: INewsDetails): React.JSX.Element => {
     </SafeAreaView>
   );
 };
+const mapStateToProps = (state) => ({
+  favouriteNews: state.news.favouriteNews,
+});
 
 const mapDispatchToProps = (dispatch) => ({
   addToFavourite: (index) => dispatch(addToFavourite(index)),
+  removeFromFavourite: (index) => dispatch(removeFromFavourite(index)),
 });
 
-export default connect(null, mapDispatchToProps)(NewsDetails);
+export default connect(mapStateToProps, mapDispatchToProps)(NewsDetails);
 
 const styles = StyleSheet.create({
   buttonStyle: {

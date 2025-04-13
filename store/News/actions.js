@@ -16,6 +16,9 @@ import {
   ADD_TO_FAVOURITE_PENDING,
   ADD_TO_FAVOURITE_FULFILLED,
   ADD_TO_FAVOURITE_REJECTED,
+  REMOVE_FROM_FAVOURITE_PENDING,
+  REMOVE_FROM_FAVOURITE_FULFILLED,
+  REMOVE_FROM_FAVOURITE_REJECTED,
 } from './actionTypes';
 import { defaultHeaders } from '../../api/headers';
 
@@ -118,6 +121,23 @@ export function addToFavourite(id) {
     } catch (error) {
       dispatch({
         type: ADD_TO_FAVOURITE_REJECTED,
+        payload: { error: "Couldn't add to favourite. Try again later." },
+      });
+    }
+  };
+}
+
+export function removeFromFavourite(id) {
+  return async (dispatch) => {
+    dispatch({ type: REMOVE_FROM_FAVOURITE_PENDING });
+    try {
+      dispatch({
+        type: REMOVE_FROM_FAVOURITE_FULFILLED,
+        payload: { data: id },
+      });
+    } catch (error) {
+      dispatch({
+        type: REMOVE_FROM_FAVOURITE_REJECTED,
         payload: { error: "Couldn't add to favourite. Try again later." },
       });
     }

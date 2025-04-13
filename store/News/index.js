@@ -14,6 +14,9 @@ import {
   ADD_TO_FAVOURITE_PENDING,
   ADD_TO_FAVOURITE_FULFILLED,
   ADD_TO_FAVOURITE_REJECTED,
+  REMOVE_FROM_FAVOURITE_PENDING,
+  REMOVE_FROM_FAVOURITE_FULFILLED,
+  REMOVE_FROM_FAVOURITE_REJECTED,
 } from './actionTypes';
 
 const initialState = {
@@ -144,6 +147,28 @@ export default (state = initialState, action) => {
       };
 
     case ADD_TO_FAVOURITE_REJECTED:
+      return {
+        ...state,
+        isPendingFav: false,
+        addToFavError: action.payload.error,
+      };
+
+    case REMOVE_FROM_FAVOURITE_PENDING:
+      return {
+        ...state,
+        isPendingFav: true,
+      };
+
+    case REMOVE_FROM_FAVOURITE_FULFILLED:
+      const updatedFeeds = state.newsFeeds.filter((_, index) => index !== action.payload.data);
+
+      return {
+        ...state,
+        isPendingFav: false,
+        favouriteNews: updatedFeeds,
+      };
+
+    case REMOVE_FROM_FAVOURITE_REJECTED:
       return {
         ...state,
         isPendingFav: false,
