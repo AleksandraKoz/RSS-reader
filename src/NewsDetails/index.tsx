@@ -54,8 +54,8 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  addToFavourite: (index) => dispatch(addToFavourite(index)),
-  removeFromFavourite: (index) => dispatch(removeFromFavourite(index)),
+  addToFavourite: (index: string) => dispatch(addToFavourite(index)),
+  removeFromFavourite: (index: string) => dispatch(removeFromFavourite(index)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(NewsDetails);

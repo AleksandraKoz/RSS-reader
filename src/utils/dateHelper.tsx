@@ -15,7 +15,7 @@ export const parseDateSafe = (dateStr: string): number => {
   ];
 
   for (const format of formatsToTry) {
-    const parsed = parse(cleaned, format, new Date());
+    const parsed: Date = parse(cleaned, format, new Date());
     if (isValid(parsed)) return parsed.getTime();
   }
 
