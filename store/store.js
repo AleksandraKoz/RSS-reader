@@ -9,7 +9,7 @@ import newsReducer from './News';
 const persistConfig = {
   key: 'news',
   storage: AsyncStorage,
-  whitelist: ['newsFeeds'],
+  whitelist: ['newsFeeds', 'favouriteNews'],
   serialize: true,
 };
 

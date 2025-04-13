@@ -14,6 +14,7 @@ export type MainStackParamList = {
       description: string;
       date: string;
       images: string;
+      id: string;
     };
   };
 };

@@ -11,16 +11,25 @@ import {
   UPDATE_FEED_FULFILLED,
   UPDATE_FEED_PENDING,
   UPDATE_FEED_REJECTED,
+  ADD_TO_FAVOURITE_PENDING,
+  ADD_TO_FAVOURITE_FULFILLED,
+  ADD_TO_FAVOURITE_REJECTED,
+  REMOVE_FROM_FAVOURITE_PENDING,
+  REMOVE_FROM_FAVOURITE_FULFILLED,
+  REMOVE_FROM_FAVOURITE_REJECTED,
 } from './actionTypes';
 
 const initialState = {
   isPending: false,
+  isPendingFav: false,
   allNews: {},
   newsFeeds: [],
+  favouriteNews: [],
   addFeedError: '',
   updateFeedError: '',
   deleteFeedError: '',
   getNewsError: '',
+  addToFavError: '',
 };
 
 export default (state = initialState, action) => {
@@ -122,6 +131,48 @@ export default (state = initialState, action) => {
         allNews: null,
         isPending: false,
         getNewsError: action.payload.error,
+      };
+
+    case ADD_TO_FAVOURITE_PENDING:
+      return {
+        ...state,
+        isPendingFav: true,
+      };
+
+    case ADD_TO_FAVOURITE_FULFILLED:
+      return {
+        ...state,
+        isPendingFav: false,
+        favouriteNews: [...state.favouriteNews, action.payload.data],
+      };
+
+    case ADD_TO_FAVOURITE_REJECTED:
+      return {
+        ...state,
+        isPendingFav: false,
+        addToFavError: action.payload.error,
+      };
+
+    case REMOVE_FROM_FAVOURITE_PENDING:
+      return {
+        ...state,
+        isPendingFav: true,
+      };
+
+    case REMOVE_FROM_FAVOURITE_FULFILLED:
+      const updatedFeeds = state.favouriteNews.filter((name) => name !== action.payload.data);
+
+      return {
+        ...state,
+        isPendingFav: false,
+        favouriteNews: updatedFeeds,
+      };
+
+    case REMOVE_FROM_FAVOURITE_REJECTED:
+      return {
+        ...state,
+        isPendingFav: false,
+        addToFavError: action.payload.error,
       };
     default:
       return state;

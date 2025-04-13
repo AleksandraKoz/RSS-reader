@@ -1,29 +1,69 @@
 import React from 'react';
-import { ScrollView, Text, View, Image, StyleSheet } from 'react-native';
+import { Image, SafeAreaView, ScrollView, StyleSheet, Text, View } from 'react-native';
 import { RouteProp, useRoute } from '@react-navigation/native';
 import { MainStackParamList } from '../navigation/MainStack.tsx';
+import Button from '../components/Button.tsx';
+import { addToFavourite, removeFromFavourite } from '../../store/News/actions';
+import { connect } from 'react-redux';
 
 type NewsDetailsRouteProp = RouteProp<MainStackParamList, 'NewsDetails'>;
 
-const NewsDetails = (): React.JSX.Element => {
+interface INewsDetails {
+  addToFavourite: (url: string) => void;
+  removeFromFavourite: (url: string) => void;
+  favouriteNews: string[];
+}
+
+const NewsDetails = ({
+  addToFavourite,
+  removeFromFavourite,
+  favouriteNews,
+}: INewsDetails): React.JSX.Element => {
   const route = useRoute<NewsDetailsRouteProp>();
-  const { title, description, date, images } = route.params.newsItem;
+  const { title, description, date, images, id } = route.params.newsItem;
+
+  const toggleFavourite = () => {
+    if (favouriteNews.includes(id)) {
+      removeFromFavourite(id);
+    } else {
+      addToFavourite(id);
+    }
+  };
 
   return (
-    <ScrollView style={{ backgroundColor: 'rgba(241, 239, 236,1)' }}>
-      <Image source={{ uri: images }} style={styles.image} resizeMode="cover" />
-      <View style={styles.content}>
-        <Text style={styles.title}>{title}</Text>
-        <Text style={styles.date}>{date}</Text>
-        <Text style={styles.description}>{description}</Text>
-      </View>
-    </ScrollView>
+    <SafeAreaView>
+      <ScrollView style={{ backgroundColor: 'rgba(241, 239, 236,1)' }}>
+        {images && <Image source={{ uri: images }} style={styles.image} resizeMode="cover" />}
+        <View style={styles.content}>
+          <Text style={styles.title}>{title}</Text>
+          <Text style={styles.date}>{date.slice(0, 22)}</Text>
+          <Text style={styles.description}>{description}</Text>
+          <Button
+            variant={favouriteNews.includes(id) ? 'cancel' : 'primary'}
+            title={favouriteNews.includes(id) ? 'Remove from favourites' : 'Add to favourites'}
+            onPress={toggleFavourite}
+            style={styles.buttonStyle}
+          />
+        </View>
+      </ScrollView>
+    </SafeAreaView>
   );
 };
+const mapStateToProps = (state) => ({
+  favouriteNews: state.news.favouriteNews,
+});
 
-export default NewsDetails;
+const mapDispatchToProps = (dispatch) => ({
+  addToFavourite: (index) => dispatch(addToFavourite(index)),
+  removeFromFavourite: (index) => dispatch(removeFromFavourite(index)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(NewsDetails);
 
 const styles = StyleSheet.create({
+  buttonStyle: {
+    marginTop: 20,
+  },
   content: {
     backgroundColor: 'rgba(241, 239, 236,1)',
     borderTopLeftRadius: 16,
@@ -43,7 +83,8 @@ const styles = StyleSheet.create({
   },
   image: {
     backgroundColor: '#ccc',
-    height: '100%',
+    height: 400,
+    resizeMode: 'contain',
     width: '100%',
   },
   title: {
