@@ -24,7 +24,7 @@ const NewsInfoCard = ({ title, description, date, images }: INewsInfoCard): Reac
         {images ? <Image source={{ uri: images }} style={styles.image} /> : null}
         <Text style={styles.titleText}>{title}</Text>
         <Text numberOfLines={4}>{description}</Text>
-        <Text style={styles.date}>{date}</Text>
+        <Text style={styles.date}>{date.slice(0, 22)}</Text>
       </Wrapper>
     </TouchableOpacity>
   );

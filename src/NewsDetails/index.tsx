@@ -15,7 +15,7 @@ const NewsDetails = (): React.JSX.Element => {
         {images && <Image source={{ uri: images }} style={styles.image} resizeMode="cover" />}
         <View style={styles.content}>
           <Text style={styles.title}>{title}</Text>
-          <Text style={styles.date}>{date}</Text>
+          <Text style={styles.date}>{date.slice(0, 22)}</Text>
           <Text style={styles.description}>{description}</Text>
         </View>
       </ScrollView>
