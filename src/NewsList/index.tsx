@@ -16,13 +16,13 @@ interface INewsListProps {
     [feedUrl: string]: {
       title?: string;
       description?: string;
-      items: Array<{
+      items: {
         id: string;
         title: string;
         description: string;
         published: string;
         enclosure?: { url: string } | { url: string }[];
-      }>;
+      }[];
     };
   };
   isPending: boolean;
