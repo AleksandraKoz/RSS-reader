@@ -1,5 +1,5 @@
 import React from 'react';
-import { ScrollView, Text, View, Image, StyleSheet } from 'react-native';
+import { ScrollView, Text, View, Image, StyleSheet, SafeAreaView } from 'react-native';
 import { RouteProp, useRoute } from '@react-navigation/native';
 import { MainStackParamList } from '../navigation/MainStack.tsx';
 
@@ -10,14 +10,16 @@ const NewsDetails = (): React.JSX.Element => {
   const { title, description, date, images } = route.params.newsItem;
 
   return (
-    <ScrollView style={{ backgroundColor: 'rgba(241, 239, 236,1)' }}>
-      <Image source={{ uri: images }} style={styles.image} resizeMode="cover" />
-      <View style={styles.content}>
-        <Text style={styles.title}>{title}</Text>
-        <Text style={styles.date}>{date}</Text>
-        <Text style={styles.description}>{description}</Text>
-      </View>
-    </ScrollView>
+    <SafeAreaView>
+      <ScrollView style={{ backgroundColor: 'rgba(241, 239, 236,1)' }}>
+        {images && <Image source={{ uri: images }} style={styles.image} resizeMode="cover" />}
+        <View style={styles.content}>
+          <Text style={styles.title}>{title}</Text>
+          <Text style={styles.date}>{date}</Text>
+          <Text style={styles.description}>{description}</Text>
+        </View>
+      </ScrollView>
+    </SafeAreaView>
   );
 };
 
@@ -43,7 +45,8 @@ const styles = StyleSheet.create({
   },
   image: {
     backgroundColor: '#ccc',
-    height: '100%',
+    height: 400,
+    resizeMode: 'contain',
     width: '100%',
   },
   title: {
