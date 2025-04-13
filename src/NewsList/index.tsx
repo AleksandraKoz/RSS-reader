@@ -3,6 +3,7 @@ import { FlatList, SafeAreaView } from 'react-native';
 import { RouteProp, useRoute } from '@react-navigation/native';
 import { connect } from 'react-redux';
 
+import { parseDateSafe } from '../utils/dateHelper.tsx';
 import { MainStackParamList } from '../navigation/MainStack';
 import NewsInfoCard from './NewsInfoCard';
 import NewsListHeader from './NewsListHeader';
@@ -37,7 +38,8 @@ const NewsList = ({ allNews, isPending }: INewsListProps): React.JSX.Element => 
         description: 'Combined feed from all sources',
         items: Object.values(allNews)
           .map((feed) => feed.items || [])
-          .flat(),
+          .flat()
+          .sort((a, b) => parseDateSafe(b.published) - parseDateSafe(a.published)),
       }
     : allNews?.[feedUrl];
 
@@ -46,7 +48,7 @@ const NewsList = ({ allNews, isPending }: INewsListProps): React.JSX.Element => 
       {(newsFeed && newsFeed?.items?.length > 0) || isPending ? (
         <FlatList
           data={newsFeed?.items}
-          keyExtractor={(item) => item.id}
+          keyExtractor={(item, index) => `${item?.id}-${index}`}
           renderItem={({ item }) => (
             <NewsInfoCard
               title={item?.title}
