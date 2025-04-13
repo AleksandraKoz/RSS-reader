@@ -46,7 +46,7 @@ const NewsList = ({ allNews, isPending }: INewsListProps): React.JSX.Element => 
       {(newsFeed && newsFeed?.items?.length > 0) || isPending ? (
         <FlatList
           data={newsFeed?.items}
-          keyExtractor={(item) => item.id}
+          keyExtractor={(item, index) => `${item?.id}-${index}`}
           renderItem={({ item }) => (
             <NewsInfoCard
               title={item?.title}
