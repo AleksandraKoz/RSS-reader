@@ -60,6 +60,16 @@ const FeedInput = ({ addNewFeed, newsFeeds }: IFeedInput): React.JSX.Element => 
   );
 };
 
+const mapStateToProps = (state) => ({
+  newsFeeds: state.news.newsFeeds,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  addNewFeed: (feed: string) => dispatch(addNewFeed(feed)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(FeedInput);
+
 const styles = StyleSheet.create({
   descriptionText: {
     color: 'rgba(18, 52, 88,1)',
@@ -100,13 +110,3 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
 });
-
-const mapStateToProps = (state) => ({
-  newsFeeds: state.news.newsFeeds,
-});
-
-const mapDispatchToProps = (dispatch) => ({
-  addNewFeed: (feed) => dispatch(addNewFeed(feed)),
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(FeedInput);

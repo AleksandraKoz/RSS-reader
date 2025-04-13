@@ -30,6 +30,8 @@ const NewsListHeader = ({
   );
 };
 
+export default NewsListHeader;
+
 const styles = StyleSheet.create({
   descriptionText: {
     color: 'rgba(18, 52, 88,1)',
@@ -63,5 +65,3 @@ const styles = StyleSheet.create({
     padding: 10,
   },
 });
-
-export default NewsListHeader;
