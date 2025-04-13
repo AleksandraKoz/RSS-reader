@@ -22,12 +22,12 @@ const NewsDetails = ({
   const route = useRoute<NewsDetailsRouteProp>();
   const { title, description, date, images, id } = route.params.newsItem;
 
-  const handleAddFavourite = () => {
-    addToFavourite(id);
-  };
-
-  const handleRemoveFavourite = () => {
-    removeFromFavourite(id);
+  const toggleFavourite = () => {
+    if (favouriteNews.includes(id)) {
+      removeFromFavourite(id);
+    } else {
+      addToFavourite(id);
+    }
   };
 
   return (
@@ -41,11 +41,7 @@ const NewsDetails = ({
           <Button
             variant={favouriteNews.includes(id) ? 'cancel' : 'primary'}
             title={favouriteNews.includes(id) ? 'Remove from favourites' : 'Add to favourites'}
-            onPress={
-              favouriteNews.includes(id)
-                ? () => handleRemoveFavourite()
-                : () => handleAddFavourite()
-            }
+            onPress={toggleFavourite}
             style={styles.buttonStyle}
           />
         </View>
