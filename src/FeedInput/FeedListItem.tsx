@@ -1,10 +1,12 @@
 import React from 'react';
 import { Image, Pressable, StyleSheet, View, Text, TouchableOpacity } from 'react-native';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { useNavigation } from '@react-navigation/native';
 import { connect } from 'react-redux';
 
 import EditIcon from '../assets/edit.png';
 
+import { MainStackParamList } from '../navigation/MainStack.tsx';
 import { getNewsFeed } from '../../store/News/actions';
 
 interface IFeedListItem {
@@ -20,9 +22,9 @@ const FeedListItem = ({
   onClickEdit,
   getNewsFeed,
 }: IFeedListItem): React.JSX.Element => {
-  const navigation = useNavigation();
+  const navigation = useNavigation<NativeStackNavigationProp<MainStackParamList>>();
 
-  const handlePress = (feedUrl) => {
+  const handlePress = (feedUrl: string) => {
     navigation.navigate('NewsList', { feedUrl });
     getNewsFeed(feedUrl);
   };
@@ -42,7 +44,7 @@ const FeedListItem = ({
 };
 
 const mapDispatchToProps = (dispatch) => ({
-  getNewsFeed: (feedUrl) => dispatch(getNewsFeed(feedUrl)),
+  getNewsFeed: (feedUrl: string) => dispatch(getNewsFeed(feedUrl)),
 });
 
 export default connect(null, mapDispatchToProps)(FeedListItem);

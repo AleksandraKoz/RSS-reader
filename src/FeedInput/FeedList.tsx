@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { FlatList, StyleSheet, Text } from 'react-native';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { useNavigation } from '@react-navigation/native';
 import { connect } from 'react-redux';
 
 import { getNewsFeed, removeFeed, updateFeed } from '../../store/News/actions';
@@ -7,7 +9,7 @@ import Wrapper from '../components/Wrapper';
 import FeedModal from './FeedModal';
 import FeedListItem from './FeedListItem.tsx';
 import Button from '../components/Button.tsx';
-import { useNavigation } from '@react-navigation/native';
+import { MainStackParamList } from '../navigation/MainStack.tsx';
 
 interface IFeedList {
   feeds: string[];
@@ -22,7 +24,7 @@ const FeedList = ({ feeds, updateFeed, removeFeed, getNewsFeed }: IFeedList): Re
   const [modalVisible, setModalVisible] = useState(false);
   const [updatedFeed, setUpdatedFeed] = useState('');
 
-  const navigation = useNavigation();
+  const navigation = useNavigation<NativeStackNavigationProp<MainStackParamList>>();
 
   const handleEdit = (feed: string, index: number) => {
     setSelectedFeed(feed);
@@ -105,9 +107,9 @@ const FeedList = ({ feeds, updateFeed, removeFeed, getNewsFeed }: IFeedList): Re
 };
 
 const mapDispatchToProps = (dispatch) => ({
-  updateFeed: (feed, index) => dispatch(updateFeed(feed, index)),
-  removeFeed: (index) => dispatch(removeFeed(index)),
-  getNewsFeed: (feedUrl) => dispatch(getNewsFeed(feedUrl)),
+  updateFeed: (feed: string, index: string) => dispatch(updateFeed(feed, index)),
+  removeFeed: (index: string) => dispatch(removeFeed(index)),
+  getNewsFeed: (feedUrl: string) => dispatch(getNewsFeed(feedUrl)),
 });
 
 export default connect(null, mapDispatchToProps)(FeedList);

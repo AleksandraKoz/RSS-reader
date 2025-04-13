@@ -1,13 +1,15 @@
 import React from 'react';
 import { Text, StyleSheet, Image, TouchableOpacity, View } from 'react-native';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { useNavigation } from '@react-navigation/native';
+import { connect } from 'react-redux';
 
 import FullHeartIcon from '../assets/fullHeart.png';
 import EmptyHeartIcon from '../assets/emptyHeart.png';
 
-import Wrapper from '../components/Wrapper.tsx';
-import { connect } from 'react-redux';
 import { addToFavourite, getNewsFeed, removeFromFavourite } from '../../store/News/actions';
+import { MainStackParamList } from '../navigation/MainStack.tsx';
+import Wrapper from '../components/Wrapper.tsx';
 
 interface INewsInfoCard {
   title: string;
@@ -30,7 +32,8 @@ const NewsInfoCard = ({
   addToFavourite,
   removeFromFavourite,
 }: INewsInfoCard): React.JSX.Element => {
-  const navigation = useNavigation();
+  const navigation = useNavigation<NativeStackNavigationProp<MainStackParamList>>();
+
   const onCardClick = () => {
     navigation.navigate('NewsDetails', {
       newsItem: { title, description, date, images, id },
@@ -70,9 +73,9 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  getNewsFeed: (feedUrl) => dispatch(getNewsFeed(feedUrl)),
-  addToFavourite: (index) => dispatch(addToFavourite(index)),
-  removeFromFavourite: (index) => dispatch(removeFromFavourite(index)),
+  getNewsFeed: (feedUrl: string) => dispatch(getNewsFeed(feedUrl)),
+  addToFavourite: (index: string) => dispatch(addToFavourite(index)),
+  removeFromFavourite: (index: string) => dispatch(removeFromFavourite(index)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(NewsInfoCard);
