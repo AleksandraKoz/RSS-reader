@@ -50,10 +50,17 @@ const FeedList = ({ feeds, updateFeed, removeFeed, getNewsFeed }: IFeedList): Re
     setModalVisible(false);
   };
 
-  const handlePressAll = async () => {
+  const handlePressAll = async (isFavourite: boolean = false) => {
     const feedPromises = feeds.map((feedUrl) => getNewsFeed(feedUrl));
     await Promise.all(feedPromises);
-    navigation.navigate('NewsList', { feedUrl: 'Show all', showAll: true });
+    if (isFavourite) {
+      navigation.navigate('NewsList', {
+        feedUrl: 'My favourite',
+        showAll: 'fav',
+      });
+    } else {
+      navigation.navigate('NewsList', { feedUrl: 'All news', showAll: 'all' });
+    }
   };
 
   return (
@@ -71,6 +78,14 @@ const FeedList = ({ feeds, updateFeed, removeFeed, getNewsFeed }: IFeedList): Re
             <FeedListItem name={item} index={index} onClickEdit={() => handleEdit(item, index)} />
           )}
           contentContainerStyle={styles.feedList}
+          ListHeaderComponent={
+            <Button
+              title="Show favourite"
+              variant="primary"
+              onPress={() => handlePressAll(true)}
+              style={{ marginBottom: 10 }}
+            />
+          }
           ListFooterComponent={
             <Button title="Show all" variant="primary" onPress={() => handlePressAll()} />
           }

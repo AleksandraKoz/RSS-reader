@@ -8,13 +8,20 @@ interface INewsInfoCard {
   description: string;
   date: string;
   images: string;
+  id: string;
 }
 
-const NewsInfoCard = ({ title, description, date, images }: INewsInfoCard): React.JSX.Element => {
+const NewsInfoCard = ({
+  title,
+  description,
+  date,
+  images,
+  id,
+}: INewsInfoCard): React.JSX.Element => {
   const navigation = useNavigation();
   const onCardClick = () => {
     navigation.navigate('NewsDetails', {
-      newsItem: { title, description, date, images },
+      newsItem: { title, description, date, images, id },
     });
   };
 

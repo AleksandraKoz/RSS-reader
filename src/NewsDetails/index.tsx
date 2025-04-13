@@ -1,13 +1,24 @@
 import React from 'react';
-import { ScrollView, Text, View, Image, StyleSheet, SafeAreaView } from 'react-native';
+import { Image, SafeAreaView, ScrollView, StyleSheet, Text, View } from 'react-native';
 import { RouteProp, useRoute } from '@react-navigation/native';
 import { MainStackParamList } from '../navigation/MainStack.tsx';
+import Button from '../components/Button.tsx';
+import { addToFavourite } from '../../store/News/actions';
+import { connect } from 'react-redux';
 
 type NewsDetailsRouteProp = RouteProp<MainStackParamList, 'NewsDetails'>;
 
-const NewsDetails = (): React.JSX.Element => {
+interface INewsDetails {
+  addToFavourite: (url: string) => void;
+}
+
+const NewsDetails = ({ addToFavourite }: INewsDetails): React.JSX.Element => {
   const route = useRoute<NewsDetailsRouteProp>();
-  const { title, description, date, images } = route.params.newsItem;
+  const { title, description, date, images, id } = route.params.newsItem;
+
+  const handleAddToFavourite = () => {
+    addToFavourite(id);
+  };
 
   return (
     <SafeAreaView>
@@ -17,15 +28,29 @@ const NewsDetails = (): React.JSX.Element => {
           <Text style={styles.title}>{title}</Text>
           <Text style={styles.date}>{date.slice(0, 22)}</Text>
           <Text style={styles.description}>{description}</Text>
+          <Button
+            title="Add to favourite"
+            onPress={() => {
+              handleAddToFavourite();
+            }}
+            style={styles.buttonStyle}
+          />
         </View>
       </ScrollView>
     </SafeAreaView>
   );
 };
 
-export default NewsDetails;
+const mapDispatchToProps = (dispatch) => ({
+  addToFavourite: (index) => dispatch(addToFavourite(index)),
+});
+
+export default connect(null, mapDispatchToProps)(NewsDetails);
 
 const styles = StyleSheet.create({
+  buttonStyle: {
+    marginTop: 20,
+  },
   content: {
     backgroundColor: 'rgba(241, 239, 236,1)',
     borderTopLeftRadius: 16,
