@@ -48,7 +48,7 @@ const NewsList = ({ allNews, isPending, favouriteNews }: INewsListProps): React.
       case 'fav':
         return {
           title: 'My favourite',
-          description: 'Selected favourite feed',
+          description: 'Selected favourite feeds',
           items: Object.values(allNews)
             .flatMap((feed) => feed.items || [])
             .filter((item) => favouriteNews.includes(item.id))
