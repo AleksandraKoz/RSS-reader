@@ -1,12 +1,12 @@
 import React, { ReactNode } from 'react';
 import { View, StyleSheet, ViewStyle } from 'react-native';
 
-interface WrapperProps {
+interface IWrapper {
   children: ReactNode;
   style?: ViewStyle;
 }
 
-const Wrapper = ({ children, style }: WrapperProps): React.JSX.Element => {
+const Wrapper = ({ children, style }: IWrapper): React.JSX.Element => {
   return <View style={[styles.wrapper, style]}>{children}</View>;
 };
 
