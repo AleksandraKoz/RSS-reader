@@ -65,7 +65,7 @@ const FeedList = ({ feeds, updateFeed, removeFeed, getNewsFeed }: IFeedList): Re
 
   return (
     <>
-      <Wrapper>
+      <Wrapper style={{ flex: 1 }}>
         <Text style={styles.subtitleText}>List of your current feeds:</Text>
         <Text style={styles.descriptionText}>Click on the feed that you want to see :)</Text>
         <Text style={styles.descriptionText}>
@@ -78,6 +78,7 @@ const FeedList = ({ feeds, updateFeed, removeFeed, getNewsFeed }: IFeedList): Re
             <FeedListItem name={item} index={index} onClickEdit={() => handleEdit(item, index)} />
           )}
           contentContainerStyle={styles.feedList}
+          showsVerticalScrollIndicator={false}
           ListHeaderComponent={
             <Button
               title="Show favourite"
