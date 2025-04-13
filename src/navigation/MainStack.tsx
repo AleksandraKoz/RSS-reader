@@ -6,7 +6,10 @@ import NewsList from '../NewsList';
 import FeedInput from '../FeedInput';
 
 export type MainStackParamList = {
-  NewsList: never;
+  NewsList: {
+    feedUrl: string;
+    showAll?: 'all' | 'fav';
+  };
   FeedInput: never;
   NewsDetails: {
     newsItem: {
