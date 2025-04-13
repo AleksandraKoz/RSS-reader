@@ -61,7 +61,7 @@ const NewsList = ({ allNews, isPending, favouriteNews }: INewsListProps): React.
     }
   };
 
-  const newsFeed = getNewsList(showAll);
+  const newsFeed = getNewsList();
 
   return (
     <SafeAreaView style={{ backgroundColor: 'rgba(212, 201, 190, 1)', flex: 1 }}>
