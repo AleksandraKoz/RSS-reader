@@ -4,6 +4,9 @@ Newsly is a simple and easy to use mobile application built with React Native. I
 you want to browse by simply adding the URL you want. You can also filter the content you see and find the article you
 want just by typing its title. You can also add the most interesting articles to your 'favourites' list.
 
+**Presentation of the RSS reader application project:**
+https://youtu.be/jh_DAfOFs7Q
+
 ## Trello Board
 
 > https://trello.com/b/x6Q4i5J0/rss-reader
