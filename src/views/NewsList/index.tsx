@@ -21,7 +21,7 @@ interface INewsListProps {
         title: string;
         description: string;
         published: string;
-        enclosure?: { url: string } | { url: string }[];
+        enclosures?: { url: string }[] | [];
       }[];
     };
   };
@@ -67,17 +67,17 @@ const NewsList = ({ allNews, isPending, favouriteNews }: INewsListProps): React.
     <SafeAreaView style={{ backgroundColor: 'rgba(212, 201, 190, 1)', flex: 1 }}>
       {(newsFeed && newsFeed?.items?.length > 0) || isPending ? (
         <FlatList
-          data={newsFeed?.items?.filter((item) =>
-            item.title.toLowerCase().includes(searchedTitle.toLowerCase())
+          data={newsFeed?.items?.filter((singleArticle) =>
+            singleArticle.title.toLowerCase().includes(searchedTitle.toLowerCase())
           )}
-          keyExtractor={(item, index) => `${item?.id}-${index}`}
-          renderItem={({ item }) => (
+          keyExtractor={(singleArticle, index) => `${singleArticle?.id}-${index}`}
+          renderItem={({ item: singleArticle }) => (
             <NewsInfoCard
-              title={item?.title}
-              description={item?.description}
-              date={item?.published}
-              images={item?.enclosure?.url ?? item?.enclosures?.[0]?.url}
-              id={item?.id}
+              title={singleArticle?.title}
+              description={singleArticle?.description}
+              date={singleArticle?.published}
+              images={singleArticle?.enclosures?.[0]?.url || ''}
+              id={singleArticle?.id}
             />
           )}
           ListHeaderComponent={
