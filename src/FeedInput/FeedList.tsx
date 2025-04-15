@@ -83,7 +83,7 @@ const FeedList = ({ feeds, updateFeed, removeFeed, getNewsFeed }: IFeedList): Re
           showsVerticalScrollIndicator={false}
           ListHeaderComponent={
             <Button
-              title="Show favourite"
+              title="Show favourites"
               variant="primary"
               onPress={() => handlePressAll(true)}
               style={{ marginBottom: 10 }}
