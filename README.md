@@ -1,97 +1,96 @@
-This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
+# Newsly - mobile RSS Reader application
 
-# Getting Started
+Newsly is a simple and easy to use mobile application built with React Native. It allows you to choose the type of feeds
+you want to browse by simply adding the URL you want. You can also filter the content you see and find the article you
+want just by typing its title. You can also add the most interesting articles to your 'favourites' list.
 
-> **Note**: Make sure you have completed the [Set Up Your Environment](https://reactnative.dev/docs/set-up-your-environment) guide before proceeding.
+**Presentation of the RSS reader application project:**
+https://youtu.be/jh_DAfOFs7Q
 
-## Step 1: Start Metro
+## Trello Board
 
-First, you will need to run **Metro**, the JavaScript build tool for React Native.
+> https://trello.com/b/x6Q4i5J0/rss-reader
 
-To start the Metro dev server, run the following command from the root of your React Native project:
+## Application Features
 
-```sh
-# Using npm
-npm start
+1. **Add RSS Feeds** - You can manually add and manage RSS feed URLs to track your favorite news sources.
+2. **Display News Articles** - Articles are shown in a clean card layout with a title, image (if available),
+   description and publication date.
+3. **Sorted by Date** - All news articles are automatically sorted in descending order by publication date.
+4. **Mark as Favorite** - You can mark news articles as favorites and later browse them in a separate view.
+5. **Search by Title** - The app includes a search input to quickly filter articles by their titles.
+6. **Modern UI** - The design is minimal, elegant, and fully responsive for mobile screens on both Android and iOS.
 
-# OR using Yarn
-yarn start
+---
+
+## Getting Started
+
+Before running this app, make sure your environment is properly set up for React Native development.
+
+> 📚 Follow the official guide to [Set Up Your Environment](https://reactnative.dev/docs/environment-setup) based on your
+> operating system (Windows/Mac/Linux) and target platform (Android/iOS).
+
+### Step 1: Clone repository and install dependencies
+
+Clone the repository by executing this command:
+
+```bash
+git clone https://github.com/AleksandraKoz/RSS-reader.git
+cd rss-reader
 ```
 
-## Step 2: Build and run your app
+Install the required JavaScript dependencies by running one of the following commands:
 
-With Metro running, open a new terminal window/pane from the root of your React Native project, and use one of the following commands to build and run your Android or iOS app:
-
-### Android
-
-```sh
-# Using npm
-npm run android
-
-# OR using Yarn
-yarn android
+```bash
+npm install
+# or
+yarn install
 ```
 
-### iOS
+---
 
-For iOS, remember to install CocoaPods dependencies (this only needs to be run on first clone or after updating native deps).
+### Step 2: Start Metro bundler and run the app
 
-The first time you create a new project, run the Ruby bundler to install CocoaPods itself:
+#### iOS
 
-```sh
-bundle install
+> 📚 Make sure you have [CocoaPods](https://cocoapods.org/) installed.
+
+First, install the necessary packages for iOS by running the following command:
+
+```bash
+cd ios && pod install
 ```
 
-Then, and every time you update your native dependencies, run:
+Then run the actual application using one of the commands:
 
-```sh
-bundle exec pod install
-```
-
-For more information, please visit [CocoaPods Getting Started guide](https://guides.cocoapods.org/using/getting-started.html).
-
-```sh
-# Using npm
+```bash
 npm run ios
-
-# OR using Yarn
+# or
 yarn ios
 ```
 
-If everything is set up correctly, you should see your new app running in the Android Emulator, iOS Simulator, or your connected device.
+> 💡 You can also open the project in Xcode and run it from there.
 
-This is one way to run your app — you can also build it directly from Android Studio or Xcode.
+#### Android
 
-## Step 3: Modify your app
+```bash
+npm run android
+# or
+yarn android
+```
 
-Now that you have successfully run the app, let's make changes!
+## Application Usage
 
-Open `App.tsx` in your text editor of choice and make some changes. When you save, your app will automatically update and reflect these changes — this is powered by [Fast Refresh](https://reactnative.dev/docs/fast-refresh).
-
-When you want to forcefully reload, for example to reset the state of your app, you can perform a full reload:
-
-- **Android**: Press the <kbd>R</kbd> key twice or select **"Reload"** from the **Dev Menu**, accessed via <kbd>Ctrl</kbd> + <kbd>M</kbd> (Windows/Linux) or <kbd>Cmd ⌘</kbd> + <kbd>M</kbd> (macOS).
-- **iOS**: Press <kbd>R</kbd> in iOS Simulator.
-
-## Congratulations! :tada:
-
-You've successfully run and modified your React Native App. :partying_face:
-
-### Now what?
-
-- If you want to add this new React Native code to an existing application, check out the [Integration guide](https://reactnative.dev/docs/integration-with-existing-apps).
-- If you're curious to learn more about React Native, check out the [docs](https://reactnative.dev/docs/getting-started).
-
-# Troubleshooting
-
-If you're having issues getting the above steps to work, see the [Troubleshooting](https://reactnative.dev/docs/troubleshooting) page.
-
-# Learn More
-
-To learn more about React Native, take a look at the following resources:
-
-- [React Native Website](https://reactnative.dev) - learn more about React Native.
-- [Getting Started](https://reactnative.dev/docs/environment-setup) - an **overview** of React Native and how setup your environment.
-- [Learn the Basics](https://reactnative.dev/docs/getting-started) - a **guided tour** of the React Native **basics**.
-- [Blog](https://reactnative.dev/blog) - read the latest official React Native **Blog** posts.
-- [`@facebook/react-native`](https://github.com/facebook/react-native) - the Open Source; GitHub **repository** for React Native.
+1. **Add a new feed** - Tap on the input field and enter a valid RSS feed URL (e.g., https://example.com/rss). Then
+   press
+   the save icon to add it.
+2. **Browse Articles from specific feeds** – Tap on any feed URL from your list. The app will fetch and display articles
+   from that specific feed, sorted by the most recent publication date.
+3. **Search by title** - Use the search input at the top to filter articles by keywords in their titles.
+4. **Mark favorite** - Press the heart icon on a card or press "Add to favourites" button on article details screen to
+   save it to your favorites list. You can view favorites by tapping "Show favourites" button.
+5. **Show favourites** - Tap the "Show favourites" button to see a combined view of your favourite articles.
+6. **Show all news** - Tap the "Show all" button to see a combined view of all articles from every added feed.
+7. **View article details** - Tap on any article card to see full details including image, title, date, and full
+   description.
+8. **Delete or edit feeds** - Press the pencil icon next to a feed to update or remove it from the list.
