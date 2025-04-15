@@ -78,3 +78,19 @@ npm run android
 # or
 yarn android
 ```
+
+## Application Usage
+
+1. **Add a new feed** - Tap on the input field and enter a valid RSS feed URL (e.g., https://example.com/rss). Then
+   press
+   the save icon to add it.
+2. **Browse Articles from specific feeds** – Tap on any feed URL from your list. The app will fetch and display articles
+   from that specific feed, sorted by the most recent publication date.
+3. **Search by title** - Use the search input at the top to filter articles by keywords in their titles.
+4. **Mark favorite** - Press the heart icon on a card or press "Add to favourites" button on article details screen to
+   save it to your favorites list. You can view favorites by tapping "Show favourites" button.
+5. **Show favourites** - Tap the "Show favourites" button to see a combined view of your favourite articles.
+6. **Show all news** - Tap the "Show all" button to see a combined view of all articles from every added feed.
+7. **View article details** - Tap on any article card to see full details including image, title, date, and full
+   description.
+8. **Delete or edit feeds** - Press the pencil icon next to a feed to update or remove it from the list.
