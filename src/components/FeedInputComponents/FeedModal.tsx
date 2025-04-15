@@ -1,7 +1,7 @@
 import React from 'react';
 import { Text, View, StyleSheet, Modal, TextInput } from 'react-native';
 
-import Button from '../Base/Button.tsx';
+import Button from '../Base/Button';
 
 interface IFeedModal {
   isVisible: boolean;

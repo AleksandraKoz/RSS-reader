@@ -13,8 +13,8 @@ import { connect } from 'react-redux';
 import SaveIcon from '../../assets/save.png';
 
 import { addNewFeed } from '../../store/News/actions';
-import FeedList from '../../components/FeedInputComponents/FeedList.tsx';
-import Wrapper from '../../components/Base/Wrapper.tsx';
+import FeedList from '../../components/FeedInputComponents/FeedList';
+import Wrapper from '../../components/Base/Wrapper';
 
 interface IFeedInput {
   addNewFeed: (url: string) => void;

@@ -3,7 +3,7 @@ import { Image, StyleSheet, Text, View } from 'react-native';
 
 import SadEmojiIcon from '../../assets/sad.png';
 
-import Wrapper from '../Base/Wrapper.tsx';
+import Wrapper from '../Base/Wrapper';
 
 interface IEmptyList {
   feedUrl: string;

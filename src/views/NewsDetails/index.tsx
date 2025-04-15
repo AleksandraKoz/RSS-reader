@@ -1,10 +1,11 @@
 import React from 'react';
 import { Image, SafeAreaView, ScrollView, StyleSheet, Text, View } from 'react-native';
 import { RouteProp, useRoute } from '@react-navigation/native';
-import { MainStackParamList } from '../../navigation/MainStack.tsx';
-import Button from '../../components/Base/Button.tsx';
-import { addToFavourite, removeFromFavourite } from '../../store/News/actions';
 import { connect } from 'react-redux';
+
+import { addToFavourite, removeFromFavourite } from '../../store/News/actions';
+import { MainStackParamList } from '../../navigation/MainStack';
+import Button from '../../components/Base/Button';
 
 type NewsDetailsRouteProp = RouteProp<MainStackParamList, 'NewsDetails'>;
 

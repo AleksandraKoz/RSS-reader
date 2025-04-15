@@ -2,7 +2,7 @@ import React from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { NavigationContainer } from '@react-navigation/native';
 
-import { articlesToShowVariant } from '../components/NewsListComponents/ArticlesToShowVariant.ts';
+import { articlesToShowVariant } from '../components/NewsListComponents/ArticlesToShowVariant';
 import NewsDetails from '../views/NewsDetails';
 import NewsList from '../views/NewsList';
 import FeedInput from '../views/FeedInput';

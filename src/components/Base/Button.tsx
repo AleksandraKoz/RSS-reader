@@ -1,7 +1,7 @@
 import React from 'react';
 import { TouchableOpacity, Text, StyleSheet, ViewStyle, TextStyle } from 'react-native';
 
-import { ButtonVariant } from './ButtonVariants.ts';
+import { ButtonVariant } from './ButtonVariants';
 
 interface IButton {
   title: string;
