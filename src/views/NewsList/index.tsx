@@ -3,11 +3,11 @@ import { FlatList, SafeAreaView } from 'react-native';
 import { RouteProp, useRoute } from '@react-navigation/native';
 import { connect } from 'react-redux';
 
-import { parseDateSafe } from '../utils/dateHelper.tsx';
-import { MainStackParamList } from '../navigation/MainStack';
-import NewsInfoCard from './NewsInfoCard';
-import NewsListHeader from './NewsListHeader';
-import EmptyList from './EmptyList';
+import { parseDateSafe } from '../../utils/dateHelper.tsx';
+import { MainStackParamList } from '../../navigation/MainStack.tsx';
+import NewsInfoCard from '../../components/NewsListComponents/NewsInfoCard.tsx';
+import NewsListHeader from '../../components/NewsListComponents/NewsListHeader.tsx';
+import EmptyList from '../../components/NewsListComponents/EmptyList.tsx';
 
 type NewsListRouteProp = RouteProp<MainStackParamList, 'NewsList'>;
 

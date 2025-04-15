@@ -20,7 +20,7 @@ import {
   REMOVE_FROM_FAVOURITE_FULFILLED,
   REMOVE_FROM_FAVOURITE_REJECTED,
 } from './actionTypes';
-import { defaultHeaders } from '../../api/headers';
+import { defaultHeaders } from '../../../api/headers';
 
 export function getNewsFeed(feedUrl) {
   return async (dispatch) => {

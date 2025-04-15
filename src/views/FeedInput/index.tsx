@@ -10,11 +10,11 @@ import {
 } from 'react-native';
 import { connect } from 'react-redux';
 
-import SaveIcon from '../../src/assets/save.png';
+import SaveIcon from '../../assets/save.png';
 
 import { addNewFeed } from '../../store/News/actions';
-import FeedList from './FeedList';
-import Wrapper from '../components/Wrapper';
+import FeedList from '../../components/FeedInputComponents/FeedList.tsx';
+import Wrapper from '../../components/Base/Wrapper.tsx';
 
 interface IFeedInput {
   addNewFeed: (url: string) => void;

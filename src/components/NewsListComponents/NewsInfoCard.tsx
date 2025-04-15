@@ -4,12 +4,12 @@ import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { useNavigation } from '@react-navigation/native';
 import { connect } from 'react-redux';
 
-import FullHeartIcon from '../assets/fullHeart.png';
-import EmptyHeartIcon from '../assets/emptyHeart.png';
+import FullHeartIcon from '../../assets/fullHeart.png';
+import EmptyHeartIcon from '../../assets/emptyHeart.png';
 
 import { addToFavourite, getNewsFeed, removeFromFavourite } from '../../store/News/actions';
-import { MainStackParamList } from '../navigation/MainStack.tsx';
-import Wrapper from '../components/Wrapper.tsx';
+import { MainStackParamList } from '../../navigation/MainStack.tsx';
+import Wrapper from '../Base/Wrapper.tsx';
 
 interface INewsInfoCard {
   title: string;

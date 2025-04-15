@@ -5,11 +5,11 @@ import { useNavigation } from '@react-navigation/native';
 import { connect } from 'react-redux';
 
 import { getNewsFeed, removeFeed, updateFeed } from '../../store/News/actions';
-import Wrapper from '../components/Wrapper';
-import FeedModal from './FeedModal';
+import Wrapper from '../Base/Wrapper.tsx';
+import FeedModal from './FeedModal.tsx';
 import FeedListItem from './FeedListItem.tsx';
-import Button from '../components/Button.tsx';
-import { MainStackParamList } from '../navigation/MainStack.tsx';
+import Button from '../Base/Button.tsx';
+import { MainStackParamList } from '../../navigation/MainStack.tsx';
 
 interface IFeedList {
   feeds: string[];
