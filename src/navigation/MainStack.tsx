@@ -1,6 +1,8 @@
 import React from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { NavigationContainer } from '@react-navigation/native';
+
+import { articlesToShowVariant } from '../components/NewsListComponents/ArticlesToShowVariant.ts';
 import NewsDetails from '../views/NewsDetails';
 import NewsList from '../views/NewsList';
 import FeedInput from '../views/FeedInput';
@@ -8,7 +10,7 @@ import FeedInput from '../views/FeedInput';
 export type MainStackParamList = {
   NewsList: {
     feedUrl: string;
-    showAll?: 'all' | 'fav';
+    articlesToShow?: articlesToShowVariant;
   };
   FeedInput: never;
   NewsDetails: {

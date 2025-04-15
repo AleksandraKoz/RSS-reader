@@ -3,6 +3,7 @@ import { FlatList, SafeAreaView } from 'react-native';
 import { RouteProp, useRoute } from '@react-navigation/native';
 import { connect } from 'react-redux';
 
+import { articlesToShowVariant } from '../../components/NewsListComponents/ArticlesToShowVariant.ts';
 import { parseDateSafe } from '../../utils/dateHelper.tsx';
 import { MainStackParamList } from '../../navigation/MainStack.tsx';
 import NewsInfoCard from '../../components/NewsListComponents/NewsInfoCard.tsx';
@@ -31,12 +32,12 @@ interface INewsListProps {
 
 const NewsList = ({ allNews, isPending, favouriteNews }: INewsListProps): React.JSX.Element => {
   const route = useRoute<NewsListRouteProp>();
-  const { feedUrl, showAll } = route.params;
+  const { feedUrl, articlesToShow = articlesToShowVariant.SingleFeed } = route.params;
   const [searchedTitle, setSearchedTitle] = useState<string>('');
 
   const getNewsList = () => {
-    switch (showAll) {
-      case 'all':
+    switch (articlesToShow) {
+      case articlesToShowVariant.All:
         return {
           title: 'All News',
           description: 'Combined feed from all sources',
@@ -46,7 +47,7 @@ const NewsList = ({ allNews, isPending, favouriteNews }: INewsListProps): React.
             .sort((a, b) => parseDateSafe(b.published) - parseDateSafe(a.published)),
         };
 
-      case 'fav':
+      case articlesToShowVariant.Favourite:
         return {
           title: 'My favourite',
           description: 'Selected favourite feeds',

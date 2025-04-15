@@ -10,6 +10,7 @@ import FeedModal from './FeedModal.tsx';
 import FeedListItem from './FeedListItem.tsx';
 import Button from '../Base/Button.tsx';
 import { MainStackParamList } from '../../navigation/MainStack.tsx';
+import { articlesToShowVariant } from '../NewsListComponents/ArticlesToShowVariant.ts';
 
 interface IFeedList {
   feeds: string[];
@@ -58,10 +59,13 @@ const FeedList = ({ feeds, updateFeed, removeFeed, getNewsFeed }: IFeedList): Re
     if (isFavourite) {
       navigation.navigate('NewsList', {
         feedUrl: 'My favourite',
-        showAll: 'fav',
+        articlesToShow: articlesToShowVariant.Favourite,
       });
     } else {
-      navigation.navigate('NewsList', { feedUrl: 'All news', showAll: 'all' });
+      navigation.navigate('NewsList', {
+        feedUrl: 'All news',
+        articlesToShow: articlesToShowVariant.All,
+      });
     }
   };
 
