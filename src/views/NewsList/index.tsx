@@ -3,11 +3,13 @@ import { FlatList, SafeAreaView } from 'react-native';
 import { RouteProp, useRoute } from '@react-navigation/native';
 import { connect } from 'react-redux';
 
-import { parseDateSafe } from '../utils/dateHelper.tsx';
-import { MainStackParamList } from '../navigation/MainStack';
-import NewsInfoCard from './NewsInfoCard';
-import NewsListHeader from './NewsListHeader';
-import EmptyList from './EmptyList';
+import { articlesToShowVariant } from '../../components/NewsListComponents/ArticlesToShowVariant.ts';
+import { parseDateSafe } from '../../utils/dateHelper.tsx';
+import { MainStackParamList } from '../../navigation/MainStack.tsx';
+import NewsInfoCard from '../../components/NewsListComponents/NewsInfoCard.tsx';
+import NewsListHeader from '../../components/NewsListComponents/NewsListHeader.tsx';
+import EmptyList from '../../components/NewsListComponents/EmptyList.tsx';
+import { IStoreStates } from '../../store/storeTyping';
 
 type NewsListRouteProp = RouteProp<MainStackParamList, 'NewsList'>;
 
@@ -21,7 +23,7 @@ interface INewsListProps {
         title: string;
         description: string;
         published: string;
-        enclosure?: { url: string } | { url: string }[];
+        enclosures?: { url: string }[] | [];
       }[];
     };
   };
@@ -31,12 +33,12 @@ interface INewsListProps {
 
 const NewsList = ({ allNews, isPending, favouriteNews }: INewsListProps): React.JSX.Element => {
   const route = useRoute<NewsListRouteProp>();
-  const { feedUrl, showAll } = route.params;
+  const { feedUrl, articlesToShow = articlesToShowVariant.SingleFeed } = route.params;
   const [searchedTitle, setSearchedTitle] = useState<string>('');
 
   const getNewsList = () => {
-    switch (showAll) {
-      case 'all':
+    switch (articlesToShow) {
+      case articlesToShowVariant.All:
         return {
           title: 'All News',
           description: 'Combined feed from all sources',
@@ -46,7 +48,7 @@ const NewsList = ({ allNews, isPending, favouriteNews }: INewsListProps): React.
             .sort((a, b) => parseDateSafe(b.published) - parseDateSafe(a.published)),
         };
 
-      case 'fav':
+      case articlesToShowVariant.Favourite:
         return {
           title: 'My favourite',
           description: 'Selected favourite feeds',
@@ -67,17 +69,17 @@ const NewsList = ({ allNews, isPending, favouriteNews }: INewsListProps): React.
     <SafeAreaView style={{ backgroundColor: 'rgba(212, 201, 190, 1)', flex: 1 }}>
       {(newsFeed && newsFeed?.items?.length > 0) || isPending ? (
         <FlatList
-          data={newsFeed?.items?.filter((item) =>
-            item.title.toLowerCase().includes(searchedTitle.toLowerCase())
+          data={newsFeed?.items?.filter((singleArticle) =>
+            singleArticle.title.toLowerCase().includes(searchedTitle.toLowerCase())
           )}
-          keyExtractor={(item, index) => `${item?.id}-${index}`}
-          renderItem={({ item }) => (
+          keyExtractor={(singleArticle, index) => `${singleArticle?.id}-${index}`}
+          renderItem={({ item: singleArticle }) => (
             <NewsInfoCard
-              title={item?.title}
-              description={item?.description}
-              date={item?.published}
-              images={item?.enclosure?.url ?? item?.enclosures?.[0]?.url}
-              id={item?.id}
+              title={singleArticle?.title}
+              description={singleArticle?.description}
+              date={singleArticle?.published}
+              images={singleArticle?.enclosures?.[0]?.url || ''}
+              id={singleArticle?.id}
             />
           )}
           ListHeaderComponent={
@@ -96,7 +98,7 @@ const NewsList = ({ allNews, isPending, favouriteNews }: INewsListProps): React.
   );
 };
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = (state: IStoreStates) => ({
   allNews: state.news.allNews,
   isPending: state.news.isPending,
   favouriteNews: state.news.favouriteNews,

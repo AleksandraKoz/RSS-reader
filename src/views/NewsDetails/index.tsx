@@ -1,10 +1,13 @@
 import React from 'react';
 import { Image, SafeAreaView, ScrollView, StyleSheet, Text, View } from 'react-native';
 import { RouteProp, useRoute } from '@react-navigation/native';
-import { MainStackParamList } from '../navigation/MainStack.tsx';
-import Button from '../components/Button.tsx';
-import { addToFavourite, removeFromFavourite } from '../../store/News/actions';
+import { MainStackParamList } from '../../navigation/MainStack.tsx';
 import { connect } from 'react-redux';
+
+import { addToFavourite, removeFromFavourite } from '../../store/News/actions';
+import { IStoreStates } from '../../store/storeTyping.ts';
+import Button from '../../components/Base/Button.tsx';
+import { ButtonVariant } from '../../components/Base/ButtonVariants.ts';
 
 type NewsDetailsRouteProp = RouteProp<MainStackParamList, 'NewsDetails'>;
 
@@ -39,7 +42,7 @@ const NewsDetails = ({
           <Text style={styles.date}>{date.slice(0, 22)}</Text>
           <Text style={styles.description}>{description}</Text>
           <Button
-            variant={favouriteNews.includes(id) ? 'cancel' : 'primary'}
+            variant={favouriteNews.includes(id) ? ButtonVariant.Cancel : ButtonVariant.Primary}
             title={favouriteNews.includes(id) ? 'Remove from favourites' : 'Add to favourites'}
             onPress={toggleFavourite}
             style={styles.buttonStyle}
@@ -49,13 +52,13 @@ const NewsDetails = ({
     </SafeAreaView>
   );
 };
-const mapStateToProps = (state) => ({
+const mapStateToProps = (state: IStoreStates) => ({
   favouriteNews: state.news.favouriteNews,
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  addToFavourite: (index: string) => dispatch(addToFavourite(index)),
-  removeFromFavourite: (index: string) => dispatch(removeFromFavourite(index)),
+  addToFavourite: (id: string) => dispatch(addToFavourite(id)),
+  removeFromFavourite: (id: string) => dispatch(removeFromFavourite(id)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(NewsDetails);

@@ -5,11 +5,12 @@ import { useNavigation } from '@react-navigation/native';
 import { connect } from 'react-redux';
 
 import { getNewsFeed, removeFeed, updateFeed } from '../../store/News/actions';
-import Wrapper from '../components/Wrapper';
-import FeedModal from './FeedModal';
+import Wrapper from '../Base/Wrapper.tsx';
+import FeedModal from './FeedModal.tsx';
 import FeedListItem from './FeedListItem.tsx';
-import Button from '../components/Button.tsx';
-import { MainStackParamList } from '../navigation/MainStack.tsx';
+import Button from '../Base/Button.tsx';
+import { MainStackParamList } from '../../navigation/MainStack.tsx';
+import { articlesToShowVariant } from '../NewsListComponents/ArticlesToShowVariant.ts';
 
 interface IFeedList {
   feeds: string[];
@@ -58,10 +59,13 @@ const FeedList = ({ feeds, updateFeed, removeFeed, getNewsFeed }: IFeedList): Re
     if (isFavourite) {
       navigation.navigate('NewsList', {
         feedUrl: 'My favourite',
-        showAll: 'fav',
+        articlesToShow: articlesToShowVariant.Favourite,
       });
     } else {
-      navigation.navigate('NewsList', { feedUrl: 'All news', showAll: 'all' });
+      navigation.navigate('NewsList', {
+        feedUrl: 'All news',
+        articlesToShow: articlesToShowVariant.All,
+      });
     }
   };
 
@@ -84,14 +88,11 @@ const FeedList = ({ feeds, updateFeed, removeFeed, getNewsFeed }: IFeedList): Re
           ListHeaderComponent={
             <Button
               title="Show favourites"
-              variant="primary"
               onPress={() => handlePressAll(true)}
               style={{ marginBottom: 10 }}
             />
           }
-          ListFooterComponent={
-            <Button title="Show all" variant="primary" onPress={() => handlePressAll()} />
-          }
+          ListFooterComponent={<Button title="Show all" onPress={() => handlePressAll()} />}
         />
       </Wrapper>
       <FeedModal
@@ -107,8 +108,8 @@ const FeedList = ({ feeds, updateFeed, removeFeed, getNewsFeed }: IFeedList): Re
 };
 
 const mapDispatchToProps = (dispatch) => ({
-  updateFeed: (feed: string, index: string) => dispatch(updateFeed(feed, index)),
-  removeFeed: (index: string) => dispatch(removeFeed(index)),
+  updateFeed: (feed: string, index: number) => dispatch(updateFeed(feed, index)),
+  removeFeed: (index: number) => dispatch(removeFeed(index)),
   getNewsFeed: (feedUrl: string) => dispatch(getNewsFeed(feedUrl)),
 });
 

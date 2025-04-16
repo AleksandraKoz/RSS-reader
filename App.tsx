@@ -1,7 +1,7 @@
 import React from 'react';
 import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
-import { persistor, store } from './store/store';
+import { persistor, store } from './src/store/store';
 import MainStack from './src/navigation/MainStack.tsx';
 
 function App(): React.JSX.Element {

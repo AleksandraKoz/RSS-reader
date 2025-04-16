@@ -4,9 +4,9 @@ import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { useNavigation } from '@react-navigation/native';
 import { connect } from 'react-redux';
 
-import EditIcon from '../assets/edit.png';
+import EditIcon from '../../assets/edit.png';
 
-import { MainStackParamList } from '../navigation/MainStack.tsx';
+import { MainStackParamList } from '../../navigation/MainStack.tsx';
 import { getNewsFeed } from '../../store/News/actions';
 
 interface IFeedListItem {
