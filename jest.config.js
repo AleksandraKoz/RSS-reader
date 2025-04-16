@@ -4,8 +4,6 @@ module.exports = {
   transform: {
     '^.+\\.tsx?$': 'babel-jest',
   },
-  transformIgnorePatterns: [
-    'node_modules/(?!(react-native|@react-native|@react-navigation|@testing-library)/)',
-  ],
+  transformIgnorePatterns: ['node_modules/(?!(jest-)?@?react-native|@react-navigation)/'],
   moduleFileExtensions: ['js', 'jsx', 'json', 'ts', 'tsx'],
 };
