@@ -88,14 +88,11 @@ const FeedList = ({ feeds, updateFeed, removeFeed, getNewsFeed }: IFeedList): Re
           ListHeaderComponent={
             <Button
               title="Show favourites"
-              variant="primary"
               onPress={() => handlePressAll(true)}
               style={{ marginBottom: 10 }}
             />
           }
-          ListFooterComponent={
-            <Button title="Show all" variant="primary" onPress={() => handlePressAll()} />
-          }
+          ListFooterComponent={<Button title="Show all" onPress={() => handlePressAll()} />}
         />
       </Wrapper>
       <FeedModal

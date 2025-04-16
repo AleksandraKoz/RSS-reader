@@ -7,6 +7,7 @@ import { connect } from 'react-redux';
 import { addToFavourite, removeFromFavourite } from '../../store/News/actions';
 import { IStoreStates } from '../../store/storeTyping.ts';
 import Button from '../../components/Base/Button.tsx';
+import { ButtonVariant } from '../../components/Base/ButtonVariants.ts';
 
 type NewsDetailsRouteProp = RouteProp<MainStackParamList, 'NewsDetails'>;
 
@@ -41,7 +42,7 @@ const NewsDetails = ({
           <Text style={styles.date}>{date.slice(0, 22)}</Text>
           <Text style={styles.description}>{description}</Text>
           <Button
-            variant={favouriteNews.includes(id) ? 'cancel' : 'primary'}
+            variant={favouriteNews.includes(id) ? ButtonVariant.Cancel : ButtonVariant.Primary}
             title={favouriteNews.includes(id) ? 'Remove from favourites' : 'Add to favourites'}
             onPress={toggleFavourite}
             style={styles.buttonStyle}

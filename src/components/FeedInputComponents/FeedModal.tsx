@@ -2,6 +2,7 @@ import React from 'react';
 import { Text, View, StyleSheet, Modal, TextInput } from 'react-native';
 
 import Button from '../Base/Button.tsx';
+import { ButtonVariant } from '../Base/ButtonVariants.ts';
 
 interface IFeedModal {
   isVisible: boolean;
@@ -35,12 +36,12 @@ const FeedModal = ({
             <Button
               title="Delete"
               onPress={onDelete}
-              variant="danger-outline"
+              variant={ButtonVariant.DangerOutline}
               style={{ flex: 1 }}
             />
-            <Button title="Save" onPress={onSave} variant="primary" style={{ flex: 1 }} />
+            <Button title="Save" onPress={onSave} style={{ flex: 1 }} />
           </View>
-          <Button title="Cancel" onPress={onClose} variant="cancel-outline" />
+          <Button title="Cancel" onPress={onClose} variant={ButtonVariant.CancelOutline} />
         </View>
       </View>
     </Modal>
