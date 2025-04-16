@@ -112,7 +112,7 @@ const FeedList = ({ feeds, updateFeed, removeFeed, getNewsFeed }: IFeedList): Re
 
 const mapDispatchToProps = (dispatch) => ({
   updateFeed: (feed: string, index: number) => dispatch(updateFeed(feed, index)),
-  removeFeed: (index: string) => dispatch(removeFeed(index)),
+  removeFeed: (index: number) => dispatch(removeFeed(index)),
   getNewsFeed: (feedUrl: string) => dispatch(getNewsFeed(feedUrl)),
 });
 
