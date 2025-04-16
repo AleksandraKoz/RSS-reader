@@ -13,6 +13,7 @@ import { connect } from 'react-redux';
 import SaveIcon from '../../assets/save.png';
 
 import { addNewFeed } from '../../store/News/actions';
+import { IStoreStates } from '../../store/storeTyping';
 import FeedList from '../../components/FeedInputComponents/FeedList.tsx';
 import Wrapper from '../../components/Base/Wrapper.tsx';
 
@@ -60,7 +61,7 @@ const FeedInput = ({ addNewFeed, newsFeeds }: IFeedInput): React.JSX.Element => 
   );
 };
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = (state: IStoreStates) => ({
   newsFeeds: state.news.newsFeeds,
 });
 

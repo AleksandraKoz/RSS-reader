@@ -9,6 +9,7 @@ import { MainStackParamList } from '../../navigation/MainStack.tsx';
 import NewsInfoCard from '../../components/NewsListComponents/NewsInfoCard.tsx';
 import NewsListHeader from '../../components/NewsListComponents/NewsListHeader.tsx';
 import EmptyList from '../../components/NewsListComponents/EmptyList.tsx';
+import { IStoreStates } from '../../store/storeTyping';
 
 type NewsListRouteProp = RouteProp<MainStackParamList, 'NewsList'>;
 
@@ -97,7 +98,7 @@ const NewsList = ({ allNews, isPending, favouriteNews }: INewsListProps): React.
   );
 };
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = (state: IStoreStates) => ({
   allNews: state.news.allNews,
   isPending: state.news.isPending,
   favouriteNews: state.news.favouriteNews,
