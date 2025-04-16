@@ -7,7 +7,11 @@ interface IWrapper {
 }
 
 const Wrapper = ({ children, style }: IWrapper): React.JSX.Element => {
-  return <View style={[styles.wrapper, style]}>{children}</View>;
+  return (
+    <View testID="wrapper" style={[styles.wrapper, style]}>
+      {children}
+    </View>
+  );
 };
 
 export default Wrapper;
