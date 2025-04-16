@@ -45,10 +45,12 @@ export function getNewsFeed(feedUrl) {
           },
         })
       )
-      .catch((error) =>
+      .catch(() =>
         dispatch({
           type: GET_NEWS_FEED_REJECTED,
-          payload: { error },
+          payload: {
+            error: "Couldn't get the data. Check news feed url and try again later.",
+          },
         })
       );
   };
