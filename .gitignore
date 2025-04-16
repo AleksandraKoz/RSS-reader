@@ -15,9 +15,6 @@ expo-debug.log
 .DS_Store
 Thumbs.db
 
-# Metro
-babel.config.js
-
 # React Native
 ios/Pods/
 ios/build/
