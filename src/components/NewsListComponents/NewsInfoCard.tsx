@@ -9,6 +9,7 @@ import EmptyHeartIcon from '../../assets/emptyHeart.png';
 
 import { addToFavourite, getNewsFeed, removeFromFavourite } from '../../store/News/actions';
 import { MainStackParamList } from '../../navigation/MainStack';
+import { IStoreStates } from '../../store/storeTyping';
 import Wrapper from '../Base/Wrapper';
 
 interface INewsInfoCard {
@@ -68,14 +69,14 @@ const NewsInfoCard = ({
   );
 };
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = (state: IStoreStates) => ({
   favouriteNews: state.news.favouriteNews,
 });
 
 const mapDispatchToProps = (dispatch) => ({
   getNewsFeed: (feedUrl: string) => dispatch(getNewsFeed(feedUrl)),
-  addToFavourite: (index: string) => dispatch(addToFavourite(index)),
-  removeFromFavourite: (index: string) => dispatch(removeFromFavourite(index)),
+  addToFavourite: (id: string) => dispatch(addToFavourite(id)),
+  removeFromFavourite: (id: string) => dispatch(removeFromFavourite(id)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(NewsInfoCard);

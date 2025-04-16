@@ -88,14 +88,11 @@ const FeedList = ({ feeds, updateFeed, removeFeed, getNewsFeed }: IFeedList): Re
           ListHeaderComponent={
             <Button
               title="Show favourites"
-              variant="primary"
               onPress={() => handlePressAll(true)}
               style={{ marginBottom: 10 }}
             />
           }
-          ListFooterComponent={
-            <Button title="Show all" variant="primary" onPress={() => handlePressAll()} />
-          }
+          ListFooterComponent={<Button title="Show all" onPress={() => handlePressAll()} />}
         />
       </Wrapper>
       <FeedModal
@@ -111,8 +108,8 @@ const FeedList = ({ feeds, updateFeed, removeFeed, getNewsFeed }: IFeedList): Re
 };
 
 const mapDispatchToProps = (dispatch) => ({
-  updateFeed: (feed: string, index: string) => dispatch(updateFeed(feed, index)),
-  removeFeed: (index: string) => dispatch(removeFeed(index)),
+  updateFeed: (feed: string, index: number) => dispatch(updateFeed(feed, index)),
+  removeFeed: (index: number) => dispatch(removeFeed(index)),
   getNewsFeed: (feedUrl: string) => dispatch(getNewsFeed(feedUrl)),
 });
 

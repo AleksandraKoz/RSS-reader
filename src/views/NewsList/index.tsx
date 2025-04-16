@@ -3,12 +3,13 @@ import { FlatList, SafeAreaView } from 'react-native';
 import { RouteProp, useRoute } from '@react-navigation/native';
 import { connect } from 'react-redux';
 
-import { articlesToShowVariant } from '../../components/NewsListComponents/ArticlesToShowVariant';
+import { articlesToShowVariant } from '../../components/NewsListComponents/ArticlesToShowVariant.ts';
 import { parseDateSafe } from '../../utils/dateHelper';
 import { MainStackParamList } from '../../navigation/MainStack';
 import NewsInfoCard from '../../components/NewsListComponents/NewsInfoCard';
-import NewsListHeader from '../../components/NewsListComponents/NewsListHeader';
+import NewsListHeader from '../../components/NewsListComponents/NewsListHeader.tsx';
 import EmptyList from '../../components/NewsListComponents/EmptyList';
+import { IStoreStates } from '../../store/storeTyping';
 
 type NewsListRouteProp = RouteProp<MainStackParamList, 'NewsList'>;
 
@@ -97,7 +98,7 @@ const NewsList = ({ allNews, isPending, favouriteNews }: INewsListProps): React.
   );
 };
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = (state: IStoreStates) => ({
   allNews: state.news.allNews,
   isPending: state.news.isPending,
   favouriteNews: state.news.favouriteNews,

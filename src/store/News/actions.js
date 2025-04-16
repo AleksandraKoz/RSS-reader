@@ -45,44 +45,46 @@ export function getNewsFeed(feedUrl) {
           },
         })
       )
-      .catch((error) =>
+      .catch(() =>
         dispatch({
           type: GET_NEWS_FEED_REJECTED,
-          payload: { error },
+          payload: {
+            error: "Couldn't get the data. Check news feed url and try again later.",
+          },
         })
       );
   };
 }
 
-export function addNewFeed(newFeed) {
+export function addNewFeed(feedNameToAdd) {
   return async (dispatch, getState) => {
     dispatch({ type: ADD_NEW_FEED_PENDING });
     const { newsFeeds } = getState().news;
-    const feedAlreadyExists = newsFeeds.includes(newFeed);
-    if (feedAlreadyExists || (typeof newFeed === 'string' && !newFeed)) {
+    const feedAlreadyExists = newsFeeds.includes(feedNameToAdd);
+    if (feedAlreadyExists || (typeof feedNameToAdd === 'string' && !feedNameToAdd)) {
       dispatch({
         type: ADD_NEW_FEED_REJECTED,
         payload: {
-          error: `${!!newFeed ? 'Feed already exists' : 'Feed is empty'}`,
+          error: `${!!feedNameToAdd ? 'Feed already exists' : 'Feed is empty'}`,
         },
       });
       return;
     }
     dispatch({
       type: ADD_NEW_FEED_FULFILLED,
-      payload: { data: newFeed },
+      payload: { data: feedNameToAdd },
     });
   };
 }
 
-export function updateFeed(updatedFeed, index) {
+export function updateFeed(updatedFeedName, updatedFeedIndex) {
   return async (dispatch) => {
     dispatch({ type: UPDATE_FEED_PENDING });
 
     try {
       dispatch({
         type: UPDATE_FEED_FULFILLED,
-        payload: { data: updatedFeed, index: index },
+        payload: { data: updatedFeedName, index: updatedFeedIndex },
       });
     } catch (error) {
       dispatch({
@@ -93,13 +95,13 @@ export function updateFeed(updatedFeed, index) {
   };
 }
 
-export function removeFeed(index) {
+export function removeFeed(removedFeedIndex) {
   return async (dispatch) => {
     dispatch({ type: DELETE_FEED_PENDING });
     try {
       dispatch({
         type: DELETE_FEED_FULFILLED,
-        payload: { index: index },
+        payload: { index: removedFeedIndex },
       });
     } catch (error) {
       dispatch({
@@ -110,13 +112,13 @@ export function removeFeed(index) {
   };
 }
 
-export function addToFavourite(id) {
+export function addToFavourite(addedArticleId) {
   return async (dispatch) => {
     dispatch({ type: ADD_TO_FAVOURITE_PENDING });
     try {
       dispatch({
         type: ADD_TO_FAVOURITE_FULFILLED,
-        payload: { data: id },
+        payload: { data: addedArticleId },
       });
     } catch (error) {
       dispatch({
@@ -127,13 +129,13 @@ export function addToFavourite(id) {
   };
 }
 
-export function removeFromFavourite(id) {
+export function removeFromFavourite(removedArticleId) {
   return async (dispatch) => {
     dispatch({ type: REMOVE_FROM_FAVOURITE_PENDING });
     try {
       dispatch({
         type: REMOVE_FROM_FAVOURITE_FULFILLED,
-        payload: { data: id },
+        payload: { data: removedArticleId },
       });
     } catch (error) {
       dispatch({
