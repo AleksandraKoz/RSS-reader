@@ -4,13 +4,13 @@ import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { useNavigation } from '@react-navigation/native';
 import { connect } from 'react-redux';
 
+import { articlesToShowVariant } from '../NewsListComponents/ArticlesToShowVariant';
 import { getNewsFeed, removeFeed, updateFeed } from '../../store/News/actions';
-import Wrapper from '../Base/Wrapper.tsx';
-import FeedModal from './FeedModal.tsx';
-import FeedListItem from './FeedListItem.tsx';
-import Button from '../Base/Button.tsx';
-import { MainStackParamList } from '../../navigation/MainStack.tsx';
-import { articlesToShowVariant } from '../NewsListComponents/ArticlesToShowVariant.ts';
+import { MainStackParamList } from '../../navigation/MainStack';
+import Wrapper from '../Base/Wrapper';
+import FeedModal from './FeedModal';
+import FeedListItem from './FeedListItem';
+import Button from '../Base/Button';
 
 interface IFeedList {
   feeds: string[];

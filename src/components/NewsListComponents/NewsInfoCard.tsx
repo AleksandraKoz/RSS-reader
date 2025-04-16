@@ -8,9 +8,9 @@ import FullHeartIcon from '../../assets/fullHeart.png';
 import EmptyHeartIcon from '../../assets/emptyHeart.png';
 
 import { addToFavourite, getNewsFeed, removeFromFavourite } from '../../store/News/actions';
-import { MainStackParamList } from '../../navigation/MainStack.tsx';
+import { MainStackParamList } from '../../navigation/MainStack';
 import { IStoreStates } from '../../store/storeTyping';
-import Wrapper from '../Base/Wrapper.tsx';
+import Wrapper from '../Base/Wrapper';
 
 interface INewsInfoCard {
   title: string;

@@ -5,9 +5,9 @@ import { MainStackParamList } from '../../navigation/MainStack.tsx';
 import { connect } from 'react-redux';
 
 import { addToFavourite, removeFromFavourite } from '../../store/News/actions';
-import { IStoreStates } from '../../store/storeTyping.ts';
-import Button from '../../components/Base/Button.tsx';
-import { ButtonVariant } from '../../components/Base/ButtonVariants.ts';
+import { IStoreStates } from '../../store/storeTyping';
+import Button from '../../components/Base/Button';
+import { ButtonVariant } from '../../components/Base/ButtonVariants';
 
 type NewsDetailsRouteProp = RouteProp<MainStackParamList, 'NewsDetails'>;
 

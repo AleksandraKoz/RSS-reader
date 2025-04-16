@@ -1,6 +1,6 @@
 import React from 'react';
 import { Text, StyleSheet, TextInput } from 'react-native';
-import Wrapper from '../Base/Wrapper.tsx';
+import Wrapper from '../Base/Wrapper';
 
 interface INewsListHeader {
   title: string;

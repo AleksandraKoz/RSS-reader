@@ -4,9 +4,9 @@ import { connect } from 'react-redux';
 
 import SadEmojiIcon from '../../assets/sad.png';
 
-import Wrapper from '../Base/Wrapper.tsx';
-import ErrorDisplay from '../Base/ErrorDisplay.tsx';
-import { IStoreStates } from '../../store/storeTyping.ts';
+import Wrapper from '../Base/Wrapper';
+import ErrorDisplay from '../Base/ErrorDisplay';
+import { IStoreStates } from '../../store/storeTyping';
 
 interface IEmptyList {
   feedUrl: string;

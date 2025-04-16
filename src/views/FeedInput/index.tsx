@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 
 import { addNewFeed } from '../../store/News/actions';
 import { IStoreStates } from '../../store/storeTyping';
-import FeedList from '../../components/FeedInputComponents/FeedList.tsx';
+import FeedList from '../../components/FeedInputComponents/FeedList';
 import FeedInputHeader from '../../components/FeedInputComponents/FeedInputHeader';
 
 interface IFeedInput {

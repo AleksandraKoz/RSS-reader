@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 
 import EditIcon from '../../assets/edit.png';
 
-import { MainStackParamList } from '../../navigation/MainStack.tsx';
+import { MainStackParamList } from '../../navigation/MainStack';
 import { getNewsFeed } from '../../store/News/actions';
 
 interface IFeedListItem {
