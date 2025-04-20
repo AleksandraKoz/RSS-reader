@@ -45,12 +45,7 @@ android/gradle.properties
 *.mode2v3
 *.perspectivev3
 xcuserdata/
-*.xcworkspace
-*.xcodeproj/project.xcworkspace/
-*.xcodeproj/xcuserdata/
 ios/.DS_Store
-ios/*.xcodeproj/*
-ios/*.xcworkspace/*
 
 # Testing
 coverage/
