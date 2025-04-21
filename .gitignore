@@ -60,7 +60,6 @@ jest-test-results.json
 # Misc
 .env
 .env.*
-*.keystore
 *.jks
 credentials.json
 
