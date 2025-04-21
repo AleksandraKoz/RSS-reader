@@ -36,7 +36,7 @@ android/.cxx/
 android/app/*.iml
 android/*.iml
 android/.DS_Store
-android/gradle.properties
+android/app/.cxx/
 
 # iOS
 *.pbxuser
@@ -45,12 +45,7 @@ android/gradle.properties
 *.mode2v3
 *.perspectivev3
 xcuserdata/
-*.xcworkspace
-*.xcodeproj/project.xcworkspace/
-*.xcodeproj/xcuserdata/
 ios/.DS_Store
-ios/*.xcodeproj/*
-ios/*.xcworkspace/*
 
 # Testing
 coverage/
@@ -65,7 +60,6 @@ jest-test-results.json
 # Misc
 .env
 .env.*
-*.keystore
 *.jks
 credentials.json
 
