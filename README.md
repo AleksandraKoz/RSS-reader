@@ -36,7 +36,7 @@ Clone the repository by executing this command:
 
 ```bash
 git clone https://github.com/AleksandraKoz/RSS-reader.git
-cd rss-reader
+cd RSS-reader
 ```
 
 Install the required JavaScript dependencies by running one of the following commands:
