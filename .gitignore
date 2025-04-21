@@ -36,7 +36,7 @@ android/.cxx/
 android/app/*.iml
 android/*.iml
 android/.DS_Store
-android/gradle.properties
+android/app/.cxx/
 
 # iOS
 *.pbxuser
